@@ -6,7 +6,7 @@ import json
 from datetime import date
 from .UID import creates
 import random
-from .Mail import mail
+from .Mail import mail,remail
 
 
 @api_view(['POST','GET'])
@@ -67,9 +67,40 @@ def sendotp(request):
         name=obb.values('name')[0]['name']
         otp=random.randint(1111,9999)
         try:
-            x=OTP(email=email,otp=otp,created_at=datetime.now())
-            x.save()
+            otpobj=OTP.objects.filter(email=email)
+            if otpobj.exists():
+                otpobj.update(otp=otp)
+            else:
+                x=OTP(email=email,otp=otp,created_at=datetime.now())
+                x.save()
             mail(email,name,otp)
             return Response({"msg":"successful","status":200})
         except:
             return Response({"msg":"error","status":400})
+
+
+@api_view(['POST'])
+def resetpassword(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    email=body['email']
+    password=body['password']
+    f=body['f']
+    s=body['s']
+    t=body['t']
+    fo=body['fo']
+    usersotp=int(str(f)+str(s)+str(t)+str(fo))
+    obb=Register.objects.filter(email=email)
+    if obb.exists():
+        name=obb.values('name')[0]['name']
+        otpobj=OTP.objects.filter(email=email)
+        otp=int(otpobj.values('otp')[0]['otp'])
+        if usersotp==otp:
+            try:
+                obb.update(password=password)
+                remail(email,name)
+                return Response({"msg":"Password Changed","status":200})
+            except:
+                return Response({"msg":"error","status":400})
+        else:
+            return Response({"msg":"invalid OTP","status":401})

@@ -24,13 +24,13 @@ function Final({navigation}) {
 const go=()=>{
   axios.post(`${url}/auth/createuser`,data)
     .then(function (response) {
-        if(response['status']===200){
+        if(response['data']['status']===200){
         navigation.navigate('Login',{
-          msgs:response['msg']
+          msgs:response['data']['msg']
         })
         }
         else{
-          setErr(response['msg'])
+          setErr(response['data']['msg'])
         }
     })
     .catch(function (error) {

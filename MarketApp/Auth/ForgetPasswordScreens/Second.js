@@ -34,16 +34,17 @@ function Second({navigation}) {
             'f':first,
             's':second,
             't':third,
-            'f':fourth
+            'fo':fourth
         })
         .then(function (response) {
-            if(response['status']===200){
+          console.log(response)
+            if(response['data']['status']===200){
             navigation.navigate('Login',{
-              msgs:response['msg']
+              msgs:response['data']['msg']
             })
             }
             else{
-              setErr(response['msg'])
+              setErr(response['data']['msg'])
             }
         })
         .catch(function (error) {
