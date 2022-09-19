@@ -1,5 +1,7 @@
+from logging import exception
 import jwt
 from datetime import datetime,timedelta
+from Admins.models import ApprovedUsers
 
 from decouple import config
 
@@ -22,5 +24,25 @@ class auths:
     def encoded_jwt(self):
         return jwt.encode(Merge(self.payload,expiry_date()),key,algorithm=algo)
 
-    def decoded_jwt(self):
-        return jwt.decode(self.enc, key, algorithms=algo)
+def Authorization(request,types):
+    header= request.META.get('HTTP_AUTHORIZATION')
+    res = (header.split(' ', 1)[1])
+    dec=jwt.decode(res, key, algorithms=algo)
+
+    try:
+        obj=ApprovedUsers.objects.filter(email=dec['uid'])
+        obj_r=obj.filter(password=dec['password'])
+        if(obj_r) and dec['role']==types:
+            return dec
+        else:
+            raise Exception("Invalid")
+
+    except:
+        raise Exception("Error")
+
+
+    
+    
+    
+
+

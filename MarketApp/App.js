@@ -43,7 +43,7 @@ export default function App() {
 
   useEffect(()=>{
       retrieveData();
-      AsyncStorage.removeItem('token')
+      //AsyncStorage.removeItem('token')
   },[])
 
 

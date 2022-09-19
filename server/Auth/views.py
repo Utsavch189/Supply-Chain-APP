@@ -6,7 +6,8 @@ import json
 from datetime import date
 from .UID import creates
 import random
-from .Mail import mail,remail
+from .Mail import otp_mail,passwordUpdate_mail
+from Admins.models import ApprovedUsers
 
 
 @api_view(['POST','GET'])
@@ -15,8 +16,8 @@ def jwt(request):
     body = json.loads(body_unicode)
     email=body['uid']
     password=body['password']
-    if Register.objects.exists():
-        obj=Register.objects.filter(email=email)
+    if ApprovedUsers.objects.exists():
+        obj=ApprovedUsers.objects.filter(email=email)
         obj2=obj.filter(password=password)
         if obj2.exists():
             data={
@@ -62,7 +63,7 @@ def sendotp(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email=body['email']
-    obb=Register.objects.filter(email=email)
+    obb=ApprovedUsers.objects.filter(email=email)
     if obb.exists():
         name=obb.values('name')[0]['name']
         otp=random.randint(1111,9999)
@@ -73,7 +74,7 @@ def sendotp(request):
             else:
                 x=OTP(email=email,otp=otp,created_at=datetime.now())
                 x.save()
-            mail(email,name,otp)
+            otp_mail(email,name,otp)
             return Response({"msg":"successful","status":200})
         except:
             return Response({"msg":"error","status":400})
@@ -90,7 +91,7 @@ def resetpassword(request):
     t=body['t']
     fo=body['fo']
     usersotp=int(str(f)+str(s)+str(t)+str(fo))
-    obb=Register.objects.filter(email=email)
+    obb=ApprovedUsers.objects.filter(email=email)
     if obb.exists():
         name=obb.values('name')[0]['name']
         otpobj=OTP.objects.filter(email=email)
@@ -98,7 +99,7 @@ def resetpassword(request):
         if usersotp==otp:
             try:
                 obb.update(password=password)
-                remail(email,name)
+                passwordUpdate_mail(email,name)
                 return Response({"msg":"Password Changed","status":200})
             except:
                 return Response({"msg":"error","status":400})
