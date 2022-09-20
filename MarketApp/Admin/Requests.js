@@ -64,7 +64,7 @@ function Requests({navigation}) {
     <View style={styles.container}>
       <View style={styles.searchbarcontainer}>
         <TextInput placeholder='Search By Name' 
-        style={{borderEndWidth:1,borderColor:'black',borderRadius:50,width:'100%',height:40}}
+        style={{borderWidth:1,borderColor:'black',borderRadius:50,width:'100%',height:40}}
         onChangeText={(b)=>Search(b)}
         />
       </View>
