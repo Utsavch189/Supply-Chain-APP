@@ -5,9 +5,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AdminHome from './Admin/AdminHome';
 import Requests from './Admin/Requests';
-import Nav from './NavigationBar/Nav';
 import Approved from './Admin/Approved';
 import Deleted from './Admin/Deleted';
+import UserShowDetails from './Admin/Components/UserShowDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +43,7 @@ useEffect(()=>{
         <Stack.Screen name='Pendings' component={Requests}/>
         <Stack.Screen name='Approved Users' component={Approved}/>
         <Stack.Screen name='Deleted Users' component={Deleted}/>
+        <Stack.Screen name='UserDetails' component={UserShowDetails} />
       </Stack.Navigator>
     </NavigationContainer>
 

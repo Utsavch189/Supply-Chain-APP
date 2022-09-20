@@ -12,6 +12,7 @@ from Auth.Mail import approve_mail,removeUser_mail,Reapprove_mail
 def requests(request):
     res=(Authorization(request,'Admin'))
     if res:
+        print(res)
         users=[]
         alls=Register.objects.all()
         if alls.exists():
@@ -20,7 +21,6 @@ def requests(request):
                     'name':alls.values('name')[i]['name'],
                     'phone':alls.values('phone')[i]['phone'],
                     'email':alls.values('email')[i]['email'],
-                    'password':alls.values('password')[i]['password'],
                     'gender':alls.values('gender')[i]['gender'],
                     'whatsapp':alls.values('whatsapp_no')[i]['whatsapp_no'],
                     'role':alls.values('role')[i]['role'],
@@ -49,7 +49,6 @@ def approved_users(request):
                     'name':alls.values('name')[i]['name'],
                     'phone':alls.values('phone')[i]['phone'],
                     'email':alls.values('email')[i]['email'],
-                    'password':alls.values('password')[i]['password'],
                     'gender':alls.values('gender')[i]['gender'],
                     'whatsapp':alls.values('whatsapp_no')[i]['whatsapp_no'],
                     'role':alls.values('role')[i]['role'],
@@ -77,7 +76,6 @@ def deletedusers_users(request):
                     'name':alls.values('name')[i]['name'],
                     'phone':alls.values('phone')[i]['phone'],
                     'email':alls.values('email')[i]['email'],
-                    'password':alls.values('password')[i]['password'],
                     'gender':alls.values('gender')[i]['gender'],
                     'whatsapp':alls.values('whatsapp_no')[i]['whatsapp_no'],
                     'role':alls.values('role')[i]['role'],

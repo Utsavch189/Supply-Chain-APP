@@ -51,6 +51,7 @@ def createuser(request):
    
     try:
         idd=creates()
+        print(4444)
         x=Register(name=name,phone=number,email=email,password=password,gender=gender,whatsapp_no=whatsapp_no,role=role,id_no=idd,created_at=date.today())
         x.save()
         return Response({"msg":"Successfully Registered","status":200})

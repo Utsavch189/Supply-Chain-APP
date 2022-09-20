@@ -31,7 +31,7 @@ function Nav({role,state,navigation,data}) {
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: 'white',
+      backgroundColor: '#F5F4F2 ',
       height:'8%',
       width:'100%',
       position:'absolute',
@@ -40,7 +40,11 @@ const styles = StyleSheet.create({
       flexDirection:'column',
       alignItems:'center',
       justifyContent:'center',   
-      zIndex:1000  
+      zIndex:1000  ,
+      shadowColor: '#171717',
+      shadowOffset: {width: -2, height: 4},
+      shadowOpacity: 0.2,
+      shadowRadius: 3,
     },
     subcontainer:{
         width:'80%',
