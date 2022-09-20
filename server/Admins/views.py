@@ -108,9 +108,11 @@ def approve_a_user(request):
             whatsapp=obj.values('whatsapp_no')[0]['whatsapp_no']
             role=obj.values('role')[0]['role']
             idd=obj.values('id_no')[0]['id_no']
+            print(name)
             try:
                 x=ApprovedUsers(name=name,phone=phone,email=email,password=password,gender=gender,whatsapp_no=whatsapp,role=role,id_no=idd,approved_at=date.today())
                 x.save()
+                obj.delete()
                 approve_mail(email,name)
                 return Response({"msg":"successfully created!","status":200})
             except:
@@ -124,11 +126,13 @@ def approve_a_user(request):
 def delete_a_user(request):
     res=(Authorization(request,'Admin'))
     if res:
+        
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         id_no=body['id_no']
-        obj=ApprovedUsers.objects.filter(id_no=id_no)
+        obj=Register.objects.filter(id_no=id_no)
         if obj.exists():
+           
             name=obj.values('name')[0]['name']
             phone=obj.values('phone')[0]['phone']
             email=obj.values('email')[0]['email']
@@ -137,8 +141,29 @@ def delete_a_user(request):
             whatsapp=obj.values('whatsapp_no')[0]['whatsapp_no']
             role=obj.values('role')[0]['role']
             idd=obj.values('id_no')[0]['id_no']
+            
             try:
-                x=DeletedUsers(name=name,phone=phone,email=email,password=password,gender=gender,whatsapp_no=whatsapp,role=role,id_no=idd,approved_at=date.today())
+                x=DeletedUsers(name=name,phone=phone,email=email,password=password,gender=gender,whatsapp_no=whatsapp,role=role,id_no=idd,deleted_at=date.today())
+                x.save()
+                obj.delete()
+                removeUser_mail(email,name)
+                return Response({"msg":"successfully removed!","status":200})
+            except:
+                return Response({"msg":"error!","status":400})
+            
+        elif (ApprovedUsers.objects.filter(id_no=id_no).exists()):
+            obj=ApprovedUsers.objects.filter(id_no=id_no)
+            name=obj.values('name')[0]['name']
+            phone=obj.values('phone')[0]['phone']
+            email=obj.values('email')[0]['email']
+            password=obj.values('password')[0]['password']
+            gender=obj.values('gender')[0]['gender']
+            whatsapp=obj.values('whatsapp_no')[0]['whatsapp_no']
+            role=obj.values('role')[0]['role']
+            idd=obj.values('id_no')[0]['id_no']
+            
+            try:
+                x=DeletedUsers(name=name,phone=phone,email=email,password=password,gender=gender,whatsapp_no=whatsapp,role=role,id_no=idd,deleted_at=date.today())
                 x.save()
                 obj.delete()
                 removeUser_mail(email,name)
