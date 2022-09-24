@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .Jwt import auths
+from .Jwt import auths,Refresh_Token
 from .models import *
 import json
 from datetime import date
@@ -8,6 +8,7 @@ from .UID import creates
 import random
 from .Mail import otp_mail,passwordUpdate_mail
 from Admins.models import ApprovedUsers
+from django.http import HttpResponse
 
 
 @api_view(['POST','GET'])
@@ -107,3 +108,20 @@ def resetpassword(request):
                 return Response({"msg":"error","status":400})
         else:
             return Response({"msg":"invalid OTP","status":401})
+
+
+
+@api_view(['POST'])
+def refresh_token(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    tokens=body['token']
+
+    token=Refresh_Token(tokens)
+    if token:
+        return Response({"token":token,"status":200})
+    else:
+        return Response({"msg":"not expired yet!","status":400})
+
+
+

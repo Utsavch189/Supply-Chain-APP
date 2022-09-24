@@ -1,8 +1,10 @@
 import jwt
 from datetime import datetime,timedelta
 from Admins.models import ApprovedUsers
-from django.http import HttpResponse
 from decouple import config
+
+
+now = datetime.now()
 
 key=config('secret')
 algo=config('algos')
@@ -43,6 +45,34 @@ def Authorization(request,types):
 
     else:
         return 401
+
+
+
+def Refresh_Token(token):
+
+        dec=jwt.decode(token, key, algorithms=algo)
+
+        today=now.strftime('%d-%m-%Y')
+        print(today>dec['exp_date'],"refresh token")
+        if(today>dec['exp_date']):
+            email=dec['uid']
+            password=dec['password']
+            if ApprovedUsers.objects.exists():
+                obj=ApprovedUsers.objects.filter(email=email)
+                obj2=obj.filter(password=password)
+                if obj2.exists():
+                    data={
+                        "uid":obj2.values('email')[0]['email'],
+                        "password":obj2.values('password')[0]['password'],
+                        "name":obj2.values('name')[0]['name'],
+                        "id":obj.values('id_no')[0]['id_no'],
+                        "role":obj.values('role')[0]['role'],
+                        "phone":obj.values('phone')[0]['phone'],
+                        "account_creates":obj.values('approved_at')[0]['approved_at'].strftime('%m/%d/%Y')
+                    }
+                    return jwt.encode(Merge(data,expiry_date()),key,algorithm=algo)
+
+
 
 
     

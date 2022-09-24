@@ -31,7 +31,7 @@ function Nav({role,state,navigation,data}) {
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#F5F4F2 ',
+      backgroundColor: 'white ',
       height:'8%',
       width:'100%',
       position:'absolute',
@@ -52,6 +52,8 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'space-between',
+        backgroundColor:'white',
+        height:'100%'
     }
 })
 

@@ -15,6 +15,9 @@ import jwt_decode from "jwt-decode";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import First from './Auth/ForgetPasswordScreens/First';
 import Second from './Auth/ForgetPasswordScreens/Second';
+import axios from 'axios';
+import { url } from './baseUrl';
+import UserProfile from './UserProfile';
 
 
 const Stack = createNativeStackNavigator();
@@ -29,7 +32,12 @@ export default function App() {
           const val=await AsyncStorage.getItem('token');
           if(val){
             if(jwt_decode(val)){
+              
               setToken(val)
+              axios.post(`${url}/auth/refresh_token`,{"token":JSON.parse(val)})
+              .then(res=>{if(res['data'].status===200){
+                AsyncStorage.setItem('token',JSON.stringify(res['data'].token))
+              }})
               
             }
           }
@@ -80,6 +88,7 @@ export default function App() {
         <Stack.Screen name='Final' component={Final} />
         <Stack.Screen name='First Step' component={First} />
         <Stack.Screen name='Second Step' component={Second} />
+        
       </Stack.Navigator>
     </NavigationContainer>
 </>

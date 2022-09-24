@@ -6,6 +6,7 @@ import {myaxios} from '../authorizedaxios';
 import { url } from '../baseUrl';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import UserCard from './Components/UserCard';
+import Loader from '../Loader';
 
 function Requests({navigation}) {
 
@@ -56,7 +57,7 @@ function Requests({navigation}) {
     if(!req){
       return(
         <>
-        <Text>Wait</Text>
+        <Loader/>
         </>
       )
     }
@@ -68,30 +69,32 @@ function Requests({navigation}) {
     <View style={styles.container}>
       <View style={styles.searchbarcontainer}>
         <TextInput placeholder='Search By Name' 
-        style={{borderWidth:1,borderColor:'black',borderRadius:50,width:'100%',height:40}}
+        style={{borderWidth:1,backgroundColor:'white',borderColor:'black',borderRadius:50,width:'100%',height:40}}
         onChangeText={(b)=>Search(b)}
         />
       </View>
     
-       {req.length>0&&searchh.length===0&&req.map((i,k)=>
-        <ScrollView style={styles.scrollview} key={k}>
-          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token)})}>
+       
+        {req.length>0&&searchh.length===0&&<ScrollView contentContainerStyle={styles.scrollview} >
+        {req.map((i,k)=>
+          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token),'type':"request_screen",'msg':"You can remove or approve."})} key={k}>
             <UserCard data={i} token={token}/>
           </TouchableOpacity>
-          
-        </ScrollView>
-       ) }
+          ) }
+        </ScrollView>}
+       
 
-       {searchh.length>0&&searchh.map((i,k)=>
-        <ScrollView style={styles.scrollview} key={k}>
-          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token)})}>
+       
+        {searchh.length>0&&<ScrollView contentContainerStyle={styles.scrollview} >
+        {searchh.map((i,k)=>
+          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token),'type':"request_screen",'msg':"You can remove or approve."})} key={k}>
             <UserCard data={i}/>
           </TouchableOpacity>
-          
-        </ScrollView>
-       )}
+          )}
+        </ScrollView>}
+       
        {!searchh.length&&!req.length&&<>
-       <View>
+       <View >
           <Text style={{fontWeight:'bold'}}>No Requests!</Text>
        </View>
        </>}
@@ -121,12 +124,16 @@ const styles = StyleSheet.create({
     display:'flex',
     alignItems:'center',
     justifyContent:'center',
-    height:'9%'
+    height:'9%',
+    zIndex:1000
   },
   scrollview:{
-    marginTop:120,
+    marginTop:80,
     width:'100%',
-    marginLeft:68
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'center'
   }
 })
 

@@ -10,6 +10,7 @@ function UserShowDetails({navigation}) {
     const route=useRoute();
     const data=route.params.data;
     const token=(route.params.token);
+    const msg=route.params.msg;
     
 
     const approve=()=>{
@@ -18,6 +19,18 @@ function UserShowDetails({navigation}) {
         if(res['data'].status===200){
           navigation.navigate('Pendings',{
             msg:'Approved Successfully',
+            signal:200
+          })
+        }
+      })
+    }
+
+    const re_approve=()=>{
+      myaxios(JSON.parse(token)).post(`${url}/admins/reapprove_a_user`,{"id_no":(data.id)})
+      .then(res=>{
+        if(res['data'].status===200){
+          navigation.navigate('Pendings',{
+            msg:'Re_Approved Successfully',
             signal:200
           })
         }
@@ -41,6 +54,11 @@ function UserShowDetails({navigation}) {
   return (
     <>
     <View style={styles.container}>
+
+        <View style={styles.topchart}>
+            <Text style={{fontSize:14,fontWeight:'bold'}}>{msg}</Text>
+        </View>
+
         <View style={styles.subcontainer}>
           <View style={styles.topcontainer}>
               <Text style={{fontWeight:'bold',marginTop:18}}>
@@ -65,7 +83,7 @@ function UserShowDetails({navigation}) {
                   ID - {data.id}
               </Text>
           </View>
-          <View style={styles.bottomcontainer}>
+          {route.params.type==="request_screen"?<View style={styles.bottomcontainer}>
               <TouchableOpacity onPress={approve}>
                 <Icon name='check'size={25} color='green'/>
               </TouchableOpacity >
@@ -73,7 +91,20 @@ function UserShowDetails({navigation}) {
                 <Icon name='close'size={25} color='red'/>
               </TouchableOpacity>
               
-          </View>
+          </View>:route.params.type==="approve_screen"?
+          <View style={styles.bottomcontainer}>
+              <TouchableOpacity onPress={remove}>
+                <Icon name='close'size={25} color='red'/>
+              </TouchableOpacity>
+                        
+          </View>:route.params.type==="delete_screen"?
+          <View style={styles.bottomcontainer}>
+              <TouchableOpacity onPress={re_approve}>
+                <Icon name='check'size={25} color='green'/>
+              </TouchableOpacity >
+                        
+          </View>:<></>
+        }
         </View>
     </View>
     </>
@@ -99,10 +130,10 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',   
     shadowColor: '#171717',
-    shadowOffset: {width: -2, height: 4},
+    shadowOffset: {width: 2, height: 4},
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    marginBottom:80
+    marginTop:20
   },
   bottomcontainer:{
     position:'absolute',
@@ -124,7 +155,22 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     alignItems:'flex-start',
     justifyContent:'flex-start', 
-  }
+  },
+  topchart:{
+    width:"90%",
+    height:160,
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'center',
+    shadowColor: '#556B2F',
+    shadowOffset: {width: -2, height: 5},
+    shadowOpacity: 0.2,
+    shadowRadius: 3.6,   
+    position:'absolute',
+    top:0,
+    marginTop:40
+  },
 })
 
 export default UserShowDetails

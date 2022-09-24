@@ -50,6 +50,7 @@ def approved_users(request):
         alls=ApprovedUsers.objects.all()
         if alls.exists():
             for i in range(0,alls.count()):
+
                 data={
                     'name':alls.values('name')[i]['name'],
                     'phone':alls.values('phone')[i]['phone'],
@@ -61,8 +62,8 @@ def approved_users(request):
                 }
 
         
-       
-                users.append(data)
+                if not data['role']=='Admin':
+                    users.append(data)
             return Response(users)
 
         return Response({"msg":"no data"})

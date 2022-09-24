@@ -7,7 +7,8 @@ import { PieChart } from 'react-native-chart-kit';
 import { url } from '../baseUrl';
 import { myaxios } from '../authorizedaxios';
 import { Dimensions } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import UserProfile from '../UserProfile';
+import Loader from '../Loader';
 
 
 const chartConfig = {
@@ -64,6 +65,13 @@ function AdminHome({navigation}) {
     }
   },[token])
 
+
+  if(user.length===0){
+    return(
+      <Loader/>
+    )
+  }
+
   return (
     <>
     
@@ -83,54 +91,13 @@ function AdminHome({navigation}) {
       />}
      </View>
 
-     <View style={styles.account}>
-          <View style={styles.one}>
-              <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',borderColor:'black',borderWidth:1,borderRadius:'50%',height:50,width:50}}>
-                  {user['name']&&<Text style={{fontWeight:'bold',fontSize:25}}>{user['name'].charAt(0)}</Text>}
-              </View>
-              <Text style={{fontSize:25}}>{user['name']}</Text>
-          </View>
-          <View style={styles.two}>
-            <View style={styles.section}>
-              <Icon name='user-circle' size={25}/>
-              <Text style={{fontSize:25}}>{user['role']}</Text>
-            </View>
-            
-            <View style={styles.section}>
-              <Icon name='envelope' size={25}/>
-              <Text style={{fontSize:13}}>{user['uid']}</Text>
-            </View>
-
-            <View style={styles.section}>
-              <Icon name='phone' size={25}/>
-              <Text style={{fontSize:20}}>{user['phone']}</Text>
-            </View>
-
-
-            <View style={styles.section}>
-              <Icon name='info' size={25}/>
-              <Text style={{fontSize:20}}>{user['account_creates']}</Text>
-            </View>
-
-            <TouchableOpacity onPress={()=>{
-                AsyncStorage.removeItem('token')
-                navigation.navigate('Login')
-            }}>
-                <View style={styles.section1}>
-                  <Icon name='sign-out' size={25}/>
-                  <Text style={{fontSize:20}}>Logout</Text>
-                </View>
-            </TouchableOpacity>
-
-            
-          </View>
-          
-     </View>
+      <UserProfile navigation={navigation} name={user['name']} role={user['role']} email={user['uid']} phone={user['phone']} creates={user['account_creates']}/>
 
        
     </View>
     </>
   )
+ 
 }
 
 const styles = StyleSheet.create({
@@ -169,52 +136,7 @@ const styles = StyleSheet.create({
       top:0,
       marginTop:40
     },
-    account:{
-      width:"82%",
-      height:460,
-      shadowColor: '#6B8E23',
-      shadowOffset: {width: 2, height: 4},
-      shadowOpacity: 0.2,
-      shadowRadius: 3.6,   
-      position:'absolute',
-      marginTop:130,
-      overflow:'hidden'
-    },
-    one:{
-      width:"76%",
-      height:80,
-      display:'flex',
-      flexDirection:'row',
-      alignItems:'center',
-      gap:17
-    },
-    two:{
-      width:"50%",
-      height:280,
-      display:'flex',
-      flexDirection:'column',
-      alignItems:'flex-start',
-      marginTop:20,
-      justifyContent:'flex-start'
-    },
-    section:{
-      width:"90%",
-      display:'flex',
-      flexDirection:'row',
-      alignItems:'center',
-      gap:16,
-      marginLeft:13,
-      marginTop:18
-    },
-    section1:{
-      width:"90%",
-      display:'flex',
-      flexDirection:'row',
-      alignItems:'center',
-      gap:13,
-      marginLeft:13,
-      marginTop:38
-    }
+
 })
 
 
