@@ -8,6 +8,7 @@ import Requests from './Admin/Requests';
 import Approved from './Admin/Approved';
 import Deleted from './Admin/Deleted';
 import UserShowDetails from './Admin/Components/UserShowDetails';
+import Login from './Auth/Login';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,7 @@ useEffect(()=>{
         <Stack.Screen name='Approved Users' component={Approved}/>
         <Stack.Screen name='Deleted Users' component={Deleted}/>
         <Stack.Screen name='UserDetails' component={UserShowDetails} />
+        <Stack.Screen name='Login' component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
 

@@ -17,7 +17,8 @@ function UserShowDetails({navigation}) {
       .then(res=>{
         if(res['data'].status===200){
           navigation.navigate('Pendings',{
-            msg:'Approved Successfully'
+            msg:'Approved Successfully',
+            signal:200
           })
         }
       })
@@ -26,9 +27,11 @@ function UserShowDetails({navigation}) {
     const remove=()=>{
       myaxios(JSON.parse(token)).post(`${url}/admins/delete_a_user`,{"id_no":(data.id)})
       .then(res=>{
+        console.log(res['data'])
         if(res['data'].status===200){
           navigation.navigate('Pendings',{
-            msg:'Removed Successfully'
+            msg:'Removed Successfully',
+            signal:200
           })
         }
       })

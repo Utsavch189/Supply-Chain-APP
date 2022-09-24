@@ -32,10 +32,14 @@ function Requests({navigation}) {
     useEffect(()=>{
       retrieveData()
       if(token){
-        myaxios(JSON.parse(token)).post(`${url}/admins/requests`)
-        .then(res=>setReq(res['data']))
+        myaxios(JSON.parse(token)).get(`${url}/admins/requests`)
+        .then(res=>{
+          setReq(res['data'])
+          
+        })
+      
       }
-    },[token])
+    },[token,route.params.signal])
 
     const Search=(b)=>{
       if(req){
@@ -69,7 +73,7 @@ function Requests({navigation}) {
         />
       </View>
     
-       {req&&!searchh&&req.map((i,k)=>
+       {req.length>0&&searchh.length===0&&req.map((i,k)=>
         <ScrollView style={styles.scrollview} key={k}>
           <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token)})}>
             <UserCard data={i} token={token}/>
@@ -78,7 +82,7 @@ function Requests({navigation}) {
         </ScrollView>
        ) }
 
-       {searchh&&searchh.map((i,k)=>
+       {searchh.length>0&&searchh.map((i,k)=>
         <ScrollView style={styles.scrollview} key={k}>
           <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token)})}>
             <UserCard data={i}/>

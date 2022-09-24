@@ -25,11 +25,12 @@ def jwt(request):
                 "password":obj2.values('password')[0]['password'],
                 "name":obj2.values('name')[0]['name'],
                 "id":obj.values('id_no')[0]['id_no'],
-                "role":obj.values('role')[0]['role']
+                "role":obj.values('role')[0]['role'],
+                "phone":obj.values('phone')[0]['phone'],
+                "account_creates":obj.values('approved_at')[0]['approved_at'].strftime('%m/%d/%Y')
             }
             a=auths(data,"")
             JWTs=a.encoded_jwt()
-            print(JWTs)
             return Response({"token":JWTs,"status":200})
         else:
             return Response({"msg":"Invalid Credentials","status":400})
