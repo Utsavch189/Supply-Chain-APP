@@ -2,7 +2,7 @@ import React, {  useState } from 'react'
 import { StyleSheet, Text, View ,TextInput,TouchableOpacity,Image} from 'react-native';
 import axios from 'axios';
 import { url } from '../baseUrl';
-import logo from './Images/logo.jpeg';
+import login_logo from './Images/login_logo.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRoute } from '@react-navigation/native';
 
@@ -54,8 +54,8 @@ function Login({navigation}) {
 
     <View style={styles.topcontainer}>
         <Image
-        source={logo}
-        style={{width:120,height:120}}
+        source={login_logo}
+        style={{width:89,height:89}}
         />
     </View>
 
@@ -125,7 +125,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
         position:'absolute',
-        top:0
+        top:0,
+        marginTop:23
         
     },
     welcome:{
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         alignItems:'center',
         justifyContent:'center',
-        marginBottom:140
+        marginBottom:90
 
     },
     input:{

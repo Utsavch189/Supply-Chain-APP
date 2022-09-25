@@ -91,7 +91,7 @@ function AdminHome({navigation}) {
       />}
      </View>
 
-      <UserProfile navigation={navigation} name={user['name']} role={user['role']} email={user['uid']} phone={user['phone']} creates={user['account_creates']}/>
+      <UserProfile navigation={navigation} name={user['name']} role={user['role']} email={user['uid']} phone={user['phone']} creates={user['account_creates']} id={user['id']}/>
 
        
     </View>

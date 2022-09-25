@@ -22,7 +22,7 @@ function UserCard({data}) {
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#F2F3F5',
+     
       height:60,
       width:330,
       display:'flex',
@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
       alignItems:'center',
       justifyContent:'space-around',   
       shadowColor: '#556B2F',
-      shadowOffset: {width: -2, height: 4},
-      shadowOpacity: 0.2,
+      shadowOffset: {width: 2, height: 4},
+      shadowOpacity: 0.3,
       shadowRadius: 3,
       marginTop:15
     },})

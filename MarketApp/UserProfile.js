@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, Text, View ,TextInput,TouchableOpacity,Image} from 'react-native';
 
 
-function UserProfile({navigation,name,role,email,phone,creates}) {
+function UserProfile({navigation,name,role,email,phone,creates,id}) {
   return (
     <>
     <View style={styles.account}>
@@ -34,6 +34,11 @@ function UserProfile({navigation,name,role,email,phone,creates}) {
       <View style={styles.section}>
         <Icon name='info' size={25}/>
         <Text style={{fontSize:20}}>{creates}</Text>
+      </View>
+
+      <View style={styles.section}>
+        <Icon name='vcard' size={25}/>
+        <Text style={{fontSize:20}}>{id}</Text>
       </View>
 
       <TouchableOpacity onPress={()=>{

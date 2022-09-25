@@ -32,7 +32,7 @@ function Nav({role,state,navigation,data}) {
 const styles = StyleSheet.create({
     container: {
       backgroundColor: 'white ',
-      height:'8%',
+      height:'8.5%',
       width:'100%',
       position:'absolute',
       bottom:0,

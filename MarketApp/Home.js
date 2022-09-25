@@ -10,6 +10,7 @@ import Deleted from './Admin/Deleted';
 import UserShowDetails from './Admin/Components/UserShowDetails';
 import Login from './Auth/Login';
 import UserProfile from './UserProfile';
+import ActionBarLogo from './ActionBarLogo';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,7 +41,7 @@ useEffect(()=>{
     {
       user['role']==='Admin'?
       <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName='Admin Home'>
+      <Stack.Navigator initialRouteName='Admin Home' screenOptions={{headerLeft: () => <ActionBarLogo/>}}>
         <Stack.Screen name='Admin Home' component={AdminHome}/>
         <Stack.Screen name='Pendings' component={Requests}/>
         <Stack.Screen name='Approved Users' component={Approved}/>

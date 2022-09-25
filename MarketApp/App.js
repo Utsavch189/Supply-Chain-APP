@@ -17,7 +17,7 @@ import First from './Auth/ForgetPasswordScreens/First';
 import Second from './Auth/ForgetPasswordScreens/Second';
 import axios from 'axios';
 import { url } from './baseUrl';
-import UserProfile from './UserProfile';
+import ActionBarLogo from './ActionBarLogo';
 
 
 const Stack = createNativeStackNavigator();
@@ -72,7 +72,7 @@ export default function App() {
   return (
 <>
 <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
+      <Stack.Navigator initialRouteName='Login' screenOptions={{headerLeft: () => <ActionBarLogo/>}}>
         <Stack.Screen
           name="Login"
           component={Login}

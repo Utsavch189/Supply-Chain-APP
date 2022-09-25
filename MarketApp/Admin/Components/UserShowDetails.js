@@ -4,6 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { url } from '../../baseUrl';
 import { myaxios } from '../../authorizedaxios';
+import Nav from '../../NavigationBar/Nav';
 
 
 function UserShowDetails({navigation}) {
@@ -11,6 +12,8 @@ function UserShowDetails({navigation}) {
     const data=route.params.data;
     const token=(route.params.token);
     const msg=route.params.msg;
+    const name=route.params.user['name'];
+    console.log(route.params.state)
     
 
     const approve=()=>{
@@ -29,7 +32,7 @@ function UserShowDetails({navigation}) {
       myaxios(JSON.parse(token)).post(`${url}/admins/reapprove_a_user`,{"id_no":(data.id)})
       .then(res=>{
         if(res['data'].status===200){
-          navigation.navigate('Pendings',{
+          navigation.navigate('Deleted Users',{
             msg:'Re_Approved Successfully',
             signal:200
           })
@@ -42,10 +45,18 @@ function UserShowDetails({navigation}) {
       .then(res=>{
         console.log(res['data'])
         if(res['data'].status===200){
+          if(route.params.state==='approved'){
           navigation.navigate('Pendings',{
             msg:'Removed Successfully',
             signal:200
           })
+        }
+        else if(route.params.state==='deletes'){
+          navigation.navigate('Deleted Users',{
+            msg:'Removed Successfully',
+            signal:200
+          })
+        }
         }
       })
     }
@@ -54,8 +65,14 @@ function UserShowDetails({navigation}) {
   return (
     <>
     <View style={styles.container}>
-
+<Nav role={route.params.user['role']} state={route.params.state} navigation={navigation} data={route.params.user}/>
         <View style={styles.topchart}>
+        <View style={styles.one}>
+        <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',borderColor:'black',borderWidth:1,borderRadius:'50%',height:50,width:50}}>
+            {name&&<Text style={{fontWeight:'bold',fontSize:25}}>{name.charAt(0)}</Text>}
+        </View>
+        <Text style={{fontSize:25}}>{name}</Text>
+    </View>
             <Text style={{fontSize:14,fontWeight:'bold'}}>{msg}</Text>
         </View>
 
@@ -122,9 +139,9 @@ const styles = StyleSheet.create({
     justifyContent:'center',   
   },
   subcontainer: {
-    backgroundColor: '#F2F3F5',
+    
     height:420,
-    width:'86%',
+    width:'80%',
     display:'flex',
     flexDirection:'column',
     alignItems:'center',
@@ -157,7 +174,7 @@ const styles = StyleSheet.create({
     justifyContent:'flex-start', 
   },
   topchart:{
-    width:"90%",
+    width:"80%",
     height:160,
     display:'flex',
     flexDirection:'column',
@@ -170,6 +187,14 @@ const styles = StyleSheet.create({
     position:'absolute',
     top:0,
     marginTop:40
+  },
+  one:{
+    width:"76%",
+    height:80,
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    gap:17
   },
 })
 

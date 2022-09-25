@@ -11,6 +11,7 @@ import Loader from '../Loader';
 function Requests({navigation}) {
 
     const route=useRoute();
+    const user_data=route.params.data;
     const[token,setToken]=useState(null);
     const[req,setReq]=useState(null);
     const[searchh,setSearch]=useState([]);
@@ -75,9 +76,9 @@ function Requests({navigation}) {
       </View>
     
        
-        {req.length>0&&searchh.length===0&&<ScrollView contentContainerStyle={styles.scrollview} >
+        {req.length>0&&searchh.length===0&&<ScrollView contentContainerStyle={styles.scrollview} showsVerticalScrollIndicator={false}>
         {req.map((i,k)=>
-          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token),'type':"request_screen",'msg':"You can remove or approve."})} key={k}>
+          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token),'type':"request_screen",'msg':"You can remove or approve.","user":user_data,"state":"reqs"})} key={k} >
             <UserCard data={i} token={token}/>
           </TouchableOpacity>
           ) }
@@ -85,9 +86,9 @@ function Requests({navigation}) {
        
 
        
-        {searchh.length>0&&<ScrollView contentContainerStyle={styles.scrollview} >
+        {searchh.length>0&&<ScrollView contentContainerStyle={styles.scrollview} showsVerticalScrollIndicator={false}>
         {searchh.map((i,k)=>
-          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token),'type':"request_screen",'msg':"You can remove or approve."})} key={k}>
+          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token),'type':"request_screen",'msg':"You can remove or approve.","user":user_data,"state":"reqs"})} key={k} >
             <UserCard data={i}/>
           </TouchableOpacity>
           )}
@@ -133,7 +134,8 @@ const styles = StyleSheet.create({
     display:'flex',
     flexDirection:'column',
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+    height:'115%'
   }
 })
 

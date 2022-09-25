@@ -10,6 +10,9 @@ import UserCard from './Components/UserCard';
 
 function Deleted({navigation}) {
     const route=useRoute();
+    const user_data=route.params.data;
+    
+    
 
     const[token,setToken]=useState(null);
     const[req,setReq]=useState(null);
@@ -33,7 +36,6 @@ function Deleted({navigation}) {
       if(token){
         myaxios(JSON.parse(token)).get(`${url}/admins/deletedusers_users`)
         .then(res=>{
-          console.log(res)
           setReq(res['data'])
           
         })
@@ -75,7 +77,7 @@ else{
        
        {req.length>0&&searchh.length===0&& <ScrollView contentContainerStyle={styles.scrollview}   showsVerticalScrollIndicator={false}>
         {req.map((i,k)=>
-          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token),'type':"delete_screen",'msg':"Want To re approve a user? You can do it."})} key={k}>
+          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token),'type':"delete_screen",'msg':"Want To re approve a user? You can do it.","user":user_data,"state":"deletes"})} key={k}>
             <UserCard data={i} token={token}/>
           </TouchableOpacity>
           ) }
@@ -85,7 +87,7 @@ else{
        
         {searchh.length>0&&<ScrollView contentContainerStyle={styles.scrollview}  showsVerticalScrollIndicator={false}>
         {searchh.map((i,k)=>
-          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token),'type':"delete_screen",'msg':"Want To re approve a user? You can do it."})} key={k}>
+          <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token),'type':"delete_screen",'msg':"Want To re approve a user? You can do it.","user":user_data,"state":"deletes"})} key={k}>
             <UserCard data={i}/>
           </TouchableOpacity>
           )}
@@ -132,7 +134,8 @@ const styles = StyleSheet.create({
     display:'flex',
     flexDirection:'column',
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+    height:'115%'
   }
 })
 
