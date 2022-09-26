@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'Auth',
     'Admins',
+    'Manufacturer',
+    'Distributor',
+    'Retailer',
     
 ]
 

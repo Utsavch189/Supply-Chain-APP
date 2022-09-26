@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View ,TextInput,TouchableOpacity,Image} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function Nav({role,state,navigation,data}) {
+function Nav({role,state,navigation,data,token}) {
   return (
     <>
     <View style={styles.container}>
@@ -22,6 +22,21 @@ function Nav({role,state,navigation,data}) {
             })}}/>   
         </View>
 
+        :role==='Manufacturer'?
+        <View style={styles.subcontainer}>
+            <Icon name='home' color={state==='home'&&'blue'} size={25} onPress={()=>{navigation.navigate('Manufacturer Home',{
+                data:data,token:token
+            })}}/>  
+             <Icon name='plus-circle' color={state==='add_products'&&'blue'} size={25} onPress={()=>{navigation.navigate('AddProduct',{
+                data:data,token:token
+            })}}/>
+               <Icon name='shopping-basket' color={state==='entry'&&'blue'} size={25} onPress={()=>{navigation.navigate('AddProduct',{
+                data:data,token:token
+            })}}/>
+            <Icon name='share-square-o' color={state==='distribute'&&'blue'} size={25} onPress={()=>{navigation.navigate('AddProduct',{
+                data:data,token:token
+            })}}/>
+        </View>
         :<></>
         }
     </View>

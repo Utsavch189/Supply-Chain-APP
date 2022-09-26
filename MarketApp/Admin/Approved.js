@@ -86,7 +86,7 @@ else{
         {searchh.length>0&&<ScrollView contentContainerStyle={styles.scrollview} showsVerticalScrollIndicator={false}>
         {searchh.map((i,k)=>
           <TouchableOpacity onPress={()=>navigation.navigate('UserDetails',{'data':i,'token':(token),'type':"approve_screen",'msg':"want to remove a user? You can do it.", "user":user_data,"state":"approved"})} key={k} >
-            <UserCard data={i}/>
+            <UserCard data={i} token={token}/>
           </TouchableOpacity>
           )}
         </ScrollView>}

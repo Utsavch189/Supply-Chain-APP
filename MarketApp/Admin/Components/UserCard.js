@@ -6,11 +6,11 @@ function UserCard({data}) {
   return (
     <>
         <View style={styles.container}>
+          <View style={{height:30,width:30,borderColor:'black',borderWidth:1,display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+          {data.name&&<Text style={{fontWeight:'bold',fontSize:10}}>{(data.name).charAt(0)}</Text>}
+          </View>
             <Text style={{fontWeight:'bold',fontSize:10}}>
                 {data.name}
-            </Text>
-            <Text style={{fontWeight:'bold',fontSize:10}}>
-                {data.id}
             </Text>
             <Text style={{fontWeight:'bold',fontSize:10}}>
                 {data.role}
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
       alignItems:'center',
       justifyContent:'space-around',   
       shadowColor: '#556B2F',
-      shadowOffset: {width: 2, height: 4},
+      shadowOffset: {width: -2, height: 4},
       shadowOpacity: 0.3,
       shadowRadius: 3,
       marginTop:15

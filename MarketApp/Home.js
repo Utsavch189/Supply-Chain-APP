@@ -11,6 +11,8 @@ import UserShowDetails from './Admin/Components/UserShowDetails';
 import Login from './Auth/Login';
 import UserProfile from './UserProfile';
 import ActionBarLogo from './ActionBarLogo';
+import ManufacturerHome from './Manufacturer/ManufacturerHome';
+import AddProduct from './Manufacturer/AddProduct';
 
 const Stack = createNativeStackNavigator();
 
@@ -47,11 +49,21 @@ useEffect(()=>{
         <Stack.Screen name='Approved Users' component={Approved}/>
         <Stack.Screen name='Deleted Users' component={Deleted}/>
         <Stack.Screen name='UserDetails' component={UserShowDetails} />
-        <Stack.Screen name='Login' component={Login} />
-        <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
+        <Stack.Screen name='Home' component={Home} options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
 
+    :
+    user['role']==='Manufacturer'?
+    <NavigationContainer independent={true}>
+      <Stack.Navigator initialRouteName='Manufacturer Home' screenOptions={{headerLeft: () => <ActionBarLogo/>}}>
+        <Stack.Screen name='Manufacturer Home' component={ManufacturerHome}/>
+        <Stack.Screen name='AddProduct' component={AddProduct}/>
+        <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
+        <Stack.Screen name='Home' component={Home} options={{ headerShown: false }}/>
+      </Stack.Navigator>
+    </NavigationContainer>
     :<></>
     }
     
