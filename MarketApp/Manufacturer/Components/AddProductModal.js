@@ -6,6 +6,7 @@ import { url } from '../../baseUrl';
 import { myaxios } from '../../authorizedaxios';
 
 
+
 function AddProductModal({is_visible,set,token}) {
 
     const[name,setName]=useState('');
@@ -14,8 +15,10 @@ function AddProductModal({is_visible,set,token}) {
     const[pid,setPid]=useState('');
 
     const submit=()=>{
+        if(token){
         myaxios(JSON.parse(token)).post(`${url}/manufacturer/set_and_update_products`,{"name":name,"price":price,"desc":desc,"p_id":pid})
         .then(res=>console.log(res))
+        }
     }
 
 

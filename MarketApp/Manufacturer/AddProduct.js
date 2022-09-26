@@ -8,6 +8,7 @@ import { url } from '../baseUrl';
 import { myaxios } from '../authorizedaxios';
 import Loader from '../Loader';
 import ProductCard from './Components/ProductCard';
+import AboutProducts from './Components/AboutProducts';
 
 function AddProduct({navigation}) {
 
@@ -15,6 +16,10 @@ function AddProduct({navigation}) {
     const[visible,setVisible]=useState(false);
     const[data,setData]=useState(null);
     const[searchh,setSearch]=useState([]);
+
+    const[aboutvisible,setAboutvisible]=useState(false);
+    const[currentdata,setCurrentdata]=useState(null);
+    
 
     useEffect(()=>{
       myaxios(JSON.parse(route.params.token)).get(`${url}/manufacturer/get_products`)
@@ -45,12 +50,13 @@ function AddProduct({navigation}) {
     <View style={styles.container}>
     <Nav role='Manufacturer' state='add_products' navigation={navigation} data={route.params.user}/>
     <View style={styles.searchbarcontainer}>
-        <TextInput placeholder='Search By Name' 
+        <TextInput placeholder='Search By Product Name' 
         style={{borderWidth:1,backgroundColor:'white',borderColor:'black',borderRadius:50,width:'100%',height:40}}
         onChangeText={(b)=>Search(b)}
         />
       </View>
     <AddProductModal is_visible={visible} set={setVisible} token={route.params.token}/>
+    <AboutProducts is_visible={aboutvisible} set={setAboutvisible} data={currentdata}/>
     <View style={styles.addbtn}>
       <TouchableOpacity onPress={()=>setVisible(true)}>
         <Icon name='plus' size={35} color='#014872'/>
@@ -59,7 +65,10 @@ function AddProduct({navigation}) {
      
     {data.length>0&&searchh.length===0&& <ScrollView contentContainerStyle={styles.scrollview} showsVerticalScrollIndicator={false}>
         {data.map((i,k)=>
-          <TouchableOpacity  key={k} >
+          <TouchableOpacity  key={k} onPress={()=>{
+            setAboutvisible(true)
+            setCurrentdata(i)
+            }}>
             <ProductCard data={i}/>
           </TouchableOpacity>
           ) }
@@ -69,7 +78,10 @@ function AddProduct({navigation}) {
        
         {searchh.length>0&&<ScrollView contentContainerStyle={styles.scrollview} showsVerticalScrollIndicator={false}>
         {searchh.map((i,k)=>
-          <TouchableOpacity  key={k} >
+          <TouchableOpacity  key={k} onPress={()=>{
+            setAboutvisible(true)
+            setCurrentdata(i)
+            }}>
             <ProductCard data={i}/>
           </TouchableOpacity>
           )}
