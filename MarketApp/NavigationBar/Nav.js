@@ -34,6 +34,9 @@ function Nav({role,state,navigation,data,token}) {
             <Icon name='share-square-o' color={state==='distribute'&&'blue'} size={25} onPress={()=>{navigation.navigate('Distribution',{
                 data:data,token:token
             })}}/>
+            <Icon name='hourglass' color={state==='history'&&'blue'} size={25} onPress={()=>{navigation.navigate('History',{
+                data:data,token:token
+            })}}/>
         </View>
         :<></>
         }

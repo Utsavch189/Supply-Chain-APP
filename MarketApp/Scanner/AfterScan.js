@@ -24,7 +24,7 @@ const chartConfig = {
 };
 
 
-function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint,post_distribute_endpoint}) {
+function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint,post_distribute_endpoint,post_dayBydaydistribute_endpoint}) {
 
   const[data,setData]=useState([]);
   const [value, setValue] = useState('');
@@ -53,6 +53,7 @@ function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint
   const distribute=()=>{
     myaxios(JSON.parse(token)).post(`${url}/${post_distribute_endpoint}`,{"p_id":value,"dist_id":userID,"quant":quant})
     .then(res=>console.log(res))
+    myaxios(JSON.parse(token)).post(`${url}/${post_dayBydaydistribute_endpoint}`,{"p_id":value,"dist_id":userID,"quant":quant})
   }
 
   if(!data && !history && !user){

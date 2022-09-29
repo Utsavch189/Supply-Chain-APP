@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button,TextInput } from 'react-native';
 import AfterScan from './AfterScan';
 
 
@@ -28,32 +28,31 @@ function QRscanner({token}) {
       };
 
 
-      if (hasPermission === null) {
-        return (
-          <View style={styles.container}>
-            <Text>Requesting for camera permission</Text>
-          </View>)
-      }
-      if (hasPermission === false) {
-        return (
-          <View style={styles.container}>
-            <Text style={{ margin: 10 }}>No access to camera</Text>
-            <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
-          </View>)
-      }
+
 
 
   return (
     <>
      <View style={styles.container}>
+     <View style={{width:"90%",height:40,display:'flex',flexDirection:'row',gap:5,alignItems:'center',marginTop:25,position:'absolute',top:0}}>
+      <TextInput onChangeText={(b)=>setText(b)} style={styles.input}/>
+    <Button title={'Search'} onPress={() => {setScanned(false)
+      setIs_visible(true)
+      }} color='blue' 
+      />
+      </View>
+      <Text style={{marginBottom:50,fontWeight:'bold',fontSize:18}}>OR</Text>
       <View style={styles.barcodebox}>
         {text===''&&<BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={{ height: 400, width: 400 }} />}
       </View>
-      {text&&<AfterScan token={token} is_visible={is_visible} set={setIs_visible} userID={text}/>}
+      {(text && is_visible)&&<AfterScan is_visible={true} set={setIs_visible} token={token} userID={text} get_p_endpoint={'manufacturer/get_products'} get_user_endpoint={'manufacturer/a_user'} post_distribute_endpoint={'manufacturer/distribute'} post_dayBydaydistribute_endpoint={'manufacturer/post_dayBYdayDistribute'}/>}
 
       {scanned&&text==='' && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
+      
+      
+   
     </View>
     </>
   )
@@ -78,6 +77,12 @@ const styles = StyleSheet.create({
       overflow: 'hidden',
       borderRadius: 30,
       backgroundColor: 'tomato'
+    },
+    input:{
+      width:"80%",
+      height:30,
+      borderWidth:1,
+      borderColor:'black'
     }
   });
 
