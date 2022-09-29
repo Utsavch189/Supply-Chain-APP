@@ -13,6 +13,7 @@ import UserProfile from './UserProfile';
 import ActionBarLogo from './ActionBarLogo';
 import ManufacturerHome from './Manufacturer/ManufacturerHome';
 import AddProduct from './Manufacturer/AddProduct';
+import Distribute from './Manufacturer/Distribute';
 
 const Stack = createNativeStackNavigator();
 
@@ -60,6 +61,7 @@ useEffect(()=>{
       <Stack.Navigator initialRouteName='Manufacturer Home' screenOptions={{headerLeft: () => <ActionBarLogo/>}}>
         <Stack.Screen name='Manufacturer Home' component={ManufacturerHome}/>
         <Stack.Screen name='AddProduct' component={AddProduct}/>
+        <Stack.Screen name='Distribution' component={Distribute}/>
         <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
         <Stack.Screen name='Home' component={Home} options={{ headerShown: false }}/>
       </Stack.Navigator>

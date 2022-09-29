@@ -30,10 +30,8 @@ function Nav({role,state,navigation,data,token}) {
              <Icon name='plus-circle' color={state==='add_products'&&'blue'} size={25} onPress={()=>{navigation.navigate('AddProduct',{
                 data:data,token:token
             })}}/>
-               <Icon name='shopping-basket' color={state==='entry'&&'blue'} size={25} onPress={()=>{navigation.navigate('AddProduct',{
-                data:data,token:token
-            })}}/>
-            <Icon name='share-square-o' color={state==='distribute'&&'blue'} size={25} onPress={()=>{navigation.navigate('AddProduct',{
+               
+            <Icon name='share-square-o' color={state==='distribute'&&'blue'} size={25} onPress={()=>{navigation.navigate('Distribution',{
                 data:data,token:token
             })}}/>
         </View>

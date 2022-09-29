@@ -31,17 +31,16 @@ class Distribute(models.Model):
     distributor_id=models.CharField(null=True,blank=True,max_length=25)
     product_id=models.CharField(null=True,blank=True,max_length=25)
     manufacturer_id=models.CharField(null=True,blank=True,max_length=25)
-    product_name=models.CharField(null=True,blank=True,max_length=25)
     product_quantity=models.CharField(null=True,blank=True,max_length=10)
     total_price=models.CharField(null=True,blank=True,max_length=10)
     calculation_status=models.BooleanField(default=False)
     date=models.DateField(date.today())
 
     def __str__(self):
-        return self.user + ' '+'('+self.product_name+')'+' '+'( from:'+self.manufacturer_id+')'
+        return '('+self.product_id+')'+' '+'( from:'+self.manufacturer_id+')'
 
 
-class TotalProducts(models.Model):
+class DayByDayProducts(models.Model):
     product_id=models.CharField(null=True,blank=True,max_length=25)
     manufacturer_id=models.CharField(null=True,blank=True,max_length=25)
     product_name=models.CharField(null=True,blank=True,max_length=25)

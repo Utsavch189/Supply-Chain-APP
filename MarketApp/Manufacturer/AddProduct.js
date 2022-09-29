@@ -19,12 +19,15 @@ function AddProduct({navigation}) {
 
     const[aboutvisible,setAboutvisible]=useState(false);
     const[currentdata,setCurrentdata]=useState(null);
-    
+  
 
     useEffect(()=>{
       myaxios(JSON.parse(route.params.token)).get(`${url}/manufacturer/get_products`)
-      .then(res=>setData(res['data'].data))
-    },[visible])
+      .then(res=>{setData(res['data'].data)
+                  console.log(res)
+    })
+      setSearch([])
+    },[visible,aboutvisible])
 
     const Search=(b)=>{
       if(data){
@@ -48,7 +51,7 @@ function AddProduct({navigation}) {
   return (
     <>
     <View style={styles.container}>
-    <Nav role='Manufacturer' state='add_products' navigation={navigation} data={route.params.user}/>
+    <Nav role='Manufacturer' state='add_products' navigation={navigation} data={route.params.user} token={route.params.token}/>
     <View style={styles.searchbarcontainer}>
         <TextInput placeholder='Search By Product Name' 
         style={{borderWidth:1,backgroundColor:'white',borderColor:'black',borderRadius:50,width:'100%',height:40}}
@@ -56,7 +59,7 @@ function AddProduct({navigation}) {
         />
       </View>
     <AddProductModal is_visible={visible} set={setVisible} token={route.params.token}/>
-    <AboutProducts is_visible={aboutvisible} set={setAboutvisible} data={currentdata}/>
+    <AboutProducts is_visible={aboutvisible} set={setAboutvisible} data={currentdata} token={route.params.token}/>
     <View style={styles.addbtn}>
       <TouchableOpacity onPress={()=>setVisible(true)}>
         <Icon name='plus' size={35} color='#014872'/>
