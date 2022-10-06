@@ -16,7 +16,7 @@ function Distribute({navigation}) {
    <>
    <View style={styles.container}>
     <Nav role='Manufacturer' state='distribute' navigation={navigation} data={route.params.user} token={route.params.token}/>
-    <QRscanner token={route.params.token}/>
+    <QRscanner token={route.params.token} get_p_endpoint={'manufacturer/get_products'} get_user_endpoint={'manufacturer/a_user'} post_distribute_endpoint={'manufacturer/distribute'} post_dayBydaydistribute_endpoint={'manufacturer/post_dayBYdayDistribute'}/>
    
    </View>
     

@@ -1,5 +1,4 @@
 import json
-from sqlite3 import DatabaseError
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from Auth.Jwt import Authorization
@@ -10,6 +9,8 @@ from .Product_id import Product
 from .models import *
 from Admins.models import ApprovedUsers
 import random
+from CommonModules.StockUpdate import Stock
+from Distributor.models import DistributorStock
 
 service=config('manufacturer_service')
 now = datetime.now()
@@ -178,45 +179,26 @@ def distribute(request):
     pre_stock=obb1.values('production_no')[0]['production_no']
 
 
-
     if(int(pre_stock)-int(quant)>=0):
 
-        dist_obj1=Distribute.objects.filter(distributor_id=dist_id)
-        if dist_obj1.exists():
-            dist_obj2=dist_obj1.filter(manufacturer_id=manu_id)
-            if dist_obj2.exists():
-                dist_obj3=dist_obj2.filter(product_id=p_id)
-                if dist_obj3.exists():
-                    quant_val=dist_obj3.values('product_quantity')[0]['product_quantity']
-                    price_val=dist_obj3.values('total_price')[0]['total_price']
-                    dist_obj3.update(product_quantity=str(int(quant)+int(quant_val)))
-                    dist_obj3.update(total_price=str(int(price_val)+(int(price)*int(quant))))
-                    obb1.update(production_no=int(pre_stock)-int(quant))
-                    return Response({"msg":"Distributed","status":200})
-                else:
-                    try:
-                        x=Distribute(distributor_id=dist_id,product_id=p_id,manufacturer_id=manu_id,product_quantity=str(quant),total_price=str(int(quant)*int(price)),calculation_status=False,date=date.today())
-                        x.save()
-                        obb1.update(production_no=int(pre_stock)-int(quant))
-                        return Response({"msg":"Distributed","status":200})
-                    except:
-                        return Response({"msg":"error!","status":400})
-
-            else:
-                try:
-                    x=Distribute(distributor_id=dist_id,product_id=p_id,manufacturer_id=manu_id,product_quantity=str(quant),total_price=str(int(quant)*int(price)),calculation_status=False,date=date.today())
-                    x.save()
-                    obb1.update(production_no=int(pre_stock)-int(quant))
-                    return Response({"msg":"Distributed","status":200})
-                except:
-                    return Response({"msg":"error!","status":400})
-
-
+        dist_obj3=Distribute.objects.filter(distributor_id=dist_id).filter(manufacturer_id=manu_id).filter(product_id=p_id)
+        
+        if dist_obj3.exists():
+            quant_val=dist_obj3.values('product_quantity')[0]['product_quantity']
+            dist_obj3.update(product_quantity=str(int(quant)+int(quant_val)))
+            dist_obj3.update(total_price=str((int(pre_stock)-int(quant))*(int(price))))
+            obb1.update(production_no=int(pre_stock)-int(quant))
+            dist_obj3.update(calculation_status=False)
+            y=Stock(dist_id)
+            y.updatefordistributor()
+            return Response({"msg":"Distributed","status":200})
         else:
             try:
                 x=Distribute(distributor_id=dist_id,product_id=p_id,manufacturer_id=manu_id,product_quantity=str(quant),total_price=str(int(quant)*int(price)),calculation_status=False,date=date.today())
                 x.save()
                 obb1.update(production_no=int(pre_stock)-int(quant))
+                y=Stock(dist_id)
+                y.updatefordistributor()
                 return Response({"msg":"Distributed","status":200})
             except:
                 return Response({"msg":"error!","status":400})
@@ -256,7 +238,7 @@ def a_user(request):
     dist_obj=Distribute.objects.filter(distributor_id=u_id)
     my_obj=dist_obj.filter(manufacturer_id=Authorization(request,service))
     for i in range(0,my_obj.count()):
-        num=random.randint(0,14)
+        num=random.randint(0,13)
         p_name=proObj.filter(Product_id=my_obj.values('product_id')[i]['product_id'])
         details={
             "name":p_name.values('name')[0]['name'],
@@ -284,26 +266,16 @@ def DayByDayEntry(request):
     name=target_obj.values('name')[0]['name']
 
     dayBYdayProOBJ=DayByDayProducts.objects.filter(product_id=p_id)
-    dayBYdayProOBJ1=dayBYdayProOBJ.filter(manufacturer_id=Authorization(request,service))
-    today=now.strftime('%d-%m-%Y')
-
-    if dayBYdayProOBJ1.exists():
-        dates=dayBYdayProOBJ1.values('date')[0]['date'].strftime('%d-%m-%Y')
-        if(today==dates):
-            try:
-                pre_quant=dayBYdayProOBJ1.values('product_quantity')[0]['product_quantity']
-                dayBYdayProOBJ1.update(product_quantity=str(int(pre_quant)+int(product_no)))
-                return Response({"msg":"successfully added in daybyday record","status":200})
-            except:
-                return Response({"msg":"error in added in daybyday record","status":400})
-
-        else:
-            try:
-                y=DayByDayProducts(product_id=p_id,manufacturer_id=Authorization(request,service),product_name=name,product_quantity=product_no,date=date.today())
-                y.save()
-                return Response({"msg":"successfully created in daybyday record","status":200})
-            except:
-                return Response({"msg":"error in creation in daybyday record","status":400})
+    dayBYdayProOBJ1=dayBYdayProOBJ.filter(manufacturer_id=Authorization(request,service)).filter(date=date.today())
+    
+    if dayBYdayProOBJ1.exists():  
+        try:
+            pre_quant=dayBYdayProOBJ1.values('product_quantity')[0]['product_quantity']
+            dayBYdayProOBJ1.update(product_quantity=str(int(pre_quant)+int(product_no)))
+            return Response({"msg":"successfully added in daybyday record","status":200})
+        except:
+            return Response({"msg":"error in added in daybyday record","status":400})
+      
     else:
         try:
             y=DayByDayProducts(product_id=p_id,manufacturer_id=Authorization(request,service),product_name=name,product_quantity=product_no,date=date.today())
@@ -327,32 +299,23 @@ def post_dayBYdayDistribute(request):
     p_id=body['p_id']
     quant=body['quant']
 
-    main_obj=DayByDayProductsDistribute.objects.filter(product_id=p_id).filter(manufacturer_id=manu_id).filter(distributor_id=dist_id)
-    today=now.strftime('%d-%m-%Y')
+    main_obj=DayByDayProductsDistribute.objects.filter(product_id=p_id).filter(manufacturer_id=manu_id).filter(distributor_id=dist_id).filter(date=date.today())
     if main_obj.exists():
-        dates=main_obj.values('date')[0]['date'].strftime('%d-%m-%Y')
-        if(today==dates):
-            try:
-                pre_quant=main_obj.values('product_quantity')[0]['product_quantity']
-                main_obj.update(product_quantity=str(int(quant)+int(pre_quant)))
-                return Response({"msg":"successfully added in daybyday record","status":200})
-            except:
-                return Response({"msg":"error in added in daybyday record","status":400})
-        else:
-            try:
-                y=DayByDayProductsDistribute(product_id=p_id,manufacturer_id=manu_id,product_quantity=quant,distributor_id=dist_id,date=date.today())
-                y.save()
-                return Response({"msg":"successfully created in daybyday record","status":200})
-            except:
-                return Response({"msg":"error in creation in daybyday record","status":400})
+        try:
+            pre_quant=main_obj.values('product_quantity')[0]['product_quantity']
+            main_obj.update(product_quantity=str(int(quant)+int(pre_quant)))
+            return Response({"msg":"Distributed","status":200})
+        except:
+            return Response({"msg":"error","status":400})
+        
 
     else:
         try:
             y=DayByDayProductsDistribute(product_id=p_id,manufacturer_id=manu_id,product_quantity=quant,distributor_id=dist_id,date=date.today())
             y.save()
-            return Response({"msg":"successfully created in daybyday record","status":200})
+            return Response({"msg":"Distributed","status":200})
         except:
-            return Response({"msg":"error in creation in daybyday record","status":400})
+            return Response({"msg":"error","status":400})
 
 
 
@@ -380,3 +343,29 @@ def get_dayBYdayDistribute(request):
         return Response({"head":head,"data":data,"tittle":tittle,"status":200})
     else:
         return Response({"msg":"no data!"})
+
+
+
+
+@api_view(['GET'])
+def get_DayByDayEntry(request):
+    if  (Authorization(request,service))==401:
+        return HttpResponse('Request Denied', status=401)
+
+    colors=['#5780c1','#34568b','#6a8ec8','#ff8a80','#ff5b4d','#ffb9b3','#adc982','#88b04b','#dce8c9','#783a6d','#cd98c3','#b565a7','#c1253c','#fbeaec']
+    main_obj=DayByDayProducts.objects.filter(manufacturer_id=Authorization(request,service)).filter(date=date.today())
+    stats=[]
+    if main_obj.exists():
+        for i in range(0,main_obj.count()):
+            num=random.randint(0,13)
+            data={
+                "name":main_obj.values('product_name')[i]['product_name'],
+                "count":main_obj.values('product_quantity')[i]['product_quantity'],
+                "color":colors[num]
+            }
+            stats.append(data)
+        return Response({"data":stats,"status":200})
+    else:
+        return Response({"data":stats,"status":200})
+
+

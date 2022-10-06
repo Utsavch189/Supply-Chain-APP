@@ -38,12 +38,12 @@ function HistoryDistribute({navigation}) {
      
      <Table borderStyle={{borderWidth: 1}}>
           <Row data={head}  style={styles.head} textStyle={styles.text}/>
-          
+          <ScrollView horizontal={true} contentContainerStyle={styles.wrapper}>
           <TableWrapper style={styles.wrapper}>
             <Col data={tittle} style={styles.title} heightArr={[28,28]} textStyle={styles.text}/>
             <Rows data={data} flexArr={[2, 1, 1]} style={styles.row} textStyle={styles.text}/>
           </TableWrapper>
-          
+          </ScrollView>
         </Table>
         
      </View>

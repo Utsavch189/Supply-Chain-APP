@@ -62,23 +62,25 @@ function UserProfile({navigation,name,role,email,phone,creates,id}) {
 const styles = StyleSheet.create({
 
     account:{
-      width:"82%",
+      width:"86%",
       height:400,
       shadowColor: '#6B8E23',
       shadowOffset: {width: 2, height: 4},
       shadowOpacity: 0.2,
       shadowRadius: 3.6,   
       position:'absolute',
-      marginTop:130,
-      overflow:'hidden'
+      marginTop:150,
+      overflow:'hidden',
+
     },
     one:{
       width:"76%",
-      height:80,
+      height:40,
       display:'flex',
       flexDirection:'row',
       alignItems:'center',
-      gap:17
+      gap:17,
+      marginTop:57
     },
     two:{
       width:"50%",
@@ -96,7 +98,7 @@ const styles = StyleSheet.create({
       alignItems:'center',
       gap:16,
       marginLeft:13,
-      marginTop:18
+      marginTop:13
     },
     section1:{
       width:"90%",
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
       alignItems:'center',
       gap:13,
       marginLeft:13,
-      marginTop:30
+      marginTop:25
     }
 })
 

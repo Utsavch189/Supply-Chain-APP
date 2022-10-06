@@ -24,17 +24,29 @@ const chartConfig = {
 };
 
 
-function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint,post_distribute_endpoint,post_dayBydaydistribute_endpoint}) {
+function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint,post_distribute_endpoint,post_dayBydaydistribute_endpoint,state}) {
 
   const[data,setData]=useState([]);
   const [value, setValue] = useState('');
   const[quant,setQuant]=useState('');
   const[user,setUser]=useState(null);
   const[history,setHistory]=useState(null);
+  const[msg,setMsg]=useState('');
 
   useEffect(()=>{
     myaxios(JSON.parse(token)).get(`${url}/${get_p_endpoint}`)
     .then(res=>{
+      if(state==='distributor'||state==='retailer'){
+        for(let i=0;i<res['data'].products.length;i++){
+        
+          let resu={
+              "label":res['data'].products[i]['name'],
+              "value":res['data'].products[i]['id']
+          }
+          setData(s=>[...s,resu])
+        }
+      }
+      else{
       for(let i=0;i<res['data'].data.length;i++){
         
         let resu={
@@ -43,20 +55,39 @@ function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint
         }
         setData(s=>[...s,resu])
       }
+    }
     })
     myaxios(JSON.parse(token)).post(`${url}/${get_user_endpoint}`,{"u_id":userID})
-    .then(res=>{setUser(res['data'].user)
+    .then(res=>{
+      setUser(res['data'].user)
                 setHistory(res['data'].history)
   })
   },[token,get_p_endpoint,get_user_endpoint])
 
   const distribute=()=>{
+    if(state==='distributor'||state==='retailer'){
+      myaxios(JSON.parse(token)).post(`${url}/${post_distribute_endpoint}`,{"p_id":value,"retailer_id":userID,"quant":quant})
+      .then(res=>{
+        setMsg(res['data'].msg)
+      })
+      myaxios(JSON.parse(token)).post(`${url}/${post_dayBydaydistribute_endpoint}`,{"p_id":value,"retailer_id":userID,"quant":quant})
+      .then(res=>{
+          setMsg(res['data'].msg)
+      })
+    }
+    else{
     myaxios(JSON.parse(token)).post(`${url}/${post_distribute_endpoint}`,{"p_id":value,"dist_id":userID,"quant":quant})
-    .then(res=>console.log(res))
+    .then(res=>{
+        setMsg(res['data'].msg)
+    })
     myaxios(JSON.parse(token)).post(`${url}/${post_dayBydaydistribute_endpoint}`,{"p_id":value,"dist_id":userID,"quant":quant})
+    .then(res=>{
+      setMsg(res['data'].msg)
+    })
+  }
   }
 
-  if(!data && !history && !user){
+  if(!data){
     return(<Loader/>)
   }
 
@@ -65,6 +96,7 @@ function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint
      <View style={{ backgroundColor:'white',position:'absolute',top:"50%",left:"50%",transform:"translate(-50%,-50%)",height:680,width:"90%"}}>
     <Modal isVisible={is_visible} >
         <View style={{ backgroundColor:'white',height:650,width:"90%",display:'flex',flexDirection:'column',alignItems:'center',position:'absolute',top:"50%",left:"50%",transform:"translate(-50%,-50%)",}}>
+          {msg&&<Text style={{fontWeight:'bold'}}>{msg}</Text>}
         <View style={{ width:"90%",display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',position:'absolute',top:0,marginTop:5}}>
                 <TouchableOpacity onPress={()=>set(false)}>
                     <Icon name='close' size={25} color='red'/>
@@ -87,11 +119,15 @@ function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint
                 value={value}
                 onChange={item => {
                 setValue(item.value);
+                setMsg('');
                  }}
                 />}
 
                  <View style={{width:"100%",display:'flex',flexDirection:'row',justifyContent:'space-around',alignItems:'center'}}>
-                    <TextInput style={styles.input} keyboardType='numeric' onChangeText={(b)=>setQuant(b)} placeholder='Enter Quantity'/>
+                    <TextInput style={styles.input} keyboardType='numeric' onChangeText={(b)=>{
+                      setMsg('')
+                      setQuant(b)
+                    }} placeholder='Enter Quantity'/>
                     <TouchableOpacity onPress={()=>distribute()}>
                       <Icon name='share' size={25} color='green'/>
                     </TouchableOpacity>   
@@ -167,11 +203,7 @@ chart:{
   display:'flex',
   flexDirection:'column',
   alignItems:'center',
-  justifyContent:'center',
-  shadowColor: '#556B2F',
-  shadowOffset: {width: -2, height: 5},
-  shadowOpacity: 0.2,
-  shadowRadius: 3.6,   
+  justifyContent:'center', 
   position:'absolute',
   bottom:0,
 

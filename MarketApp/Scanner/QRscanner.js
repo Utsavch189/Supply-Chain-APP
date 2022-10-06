@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, Button,TextInput } from 'react-native';
 import AfterScan from './AfterScan';
 
 
-function QRscanner({token}) {
+function QRscanner({token,get_p_endpoint,get_user_endpoint,post_distribute_endpoint,post_dayBydaydistribute_endpoint,state}) {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
     const [text, setText] = useState('')
@@ -24,9 +24,9 @@ function QRscanner({token}) {
         setScanned(true);
         setText(data)
         setIs_visible(true)
+        setText(data);
         console.log('Type: ' + type + '\nData: ' + data)
       };
-
 
 
 
@@ -47,7 +47,7 @@ function QRscanner({token}) {
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={{ height: 400, width: 400 }} />}
       </View>
-      {(text && is_visible)&&<AfterScan is_visible={true} set={setIs_visible} token={token} userID={text} get_p_endpoint={'manufacturer/get_products'} get_user_endpoint={'manufacturer/a_user'} post_distribute_endpoint={'manufacturer/distribute'} post_dayBydaydistribute_endpoint={'manufacturer/post_dayBYdayDistribute'}/>}
+      {(text && is_visible)&&<AfterScan is_visible={true} set={setIs_visible} token={token} userID={text} get_p_endpoint={get_p_endpoint} get_user_endpoint={get_user_endpoint} post_distribute_endpoint={post_distribute_endpoint} post_dayBydaydistribute_endpoint={post_dayBydaydistribute_endpoint} state={state}/>}
 
       {scanned&&text==='' && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
       

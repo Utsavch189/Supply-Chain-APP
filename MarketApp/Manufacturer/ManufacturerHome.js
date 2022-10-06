@@ -57,7 +57,10 @@ function ManufacturerHome({navigation}) {
     useEffect(()=>{
       get();
       retrieveData();
-     
+      if(token){
+        myaxios(JSON.parse(token)).get(`${url}/manufacturer/get_DayByDayEntry`)
+        .then(res=>setData(res['data'].data))
+      }
     },[token])
   
     if(user.length===0){
@@ -82,6 +85,7 @@ function ManufacturerHome({navigation}) {
         center={[5, 5]}
         absolute
       />}
+      <Text style={{fontWeight:'bold',marginTop:11}}>Today's Production</Text>
      </View>
 
       <UserProfile navigation={navigation} name={user['name']} role={user['role']} email={user['uid']} phone={user['phone']} creates={user['account_creates']} id={user['id']}/>
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
     },
     chart:{
       width:"90%",
-      height:160,
+      height:210,
       display:'flex',
       flexDirection:'column',
       alignItems:'center',
@@ -127,7 +131,7 @@ const styles = StyleSheet.create({
       shadowRadius: 3.6,   
       position:'absolute',
       top:0,
-      marginTop:40
+      marginTop:12
     },
 
 })
