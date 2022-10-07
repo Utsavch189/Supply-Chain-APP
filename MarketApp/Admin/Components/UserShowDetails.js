@@ -12,8 +12,8 @@ function UserShowDetails({navigation}) {
     const data=route.params.data;
     const token=(route.params.token);
     const msg=route.params.msg;
-    const name=route.params.user['name'];
-    console.log(route.params.state)
+    const name=route.params?.data['name'];
+
     
 
     const approve=()=>{
@@ -65,10 +65,10 @@ function UserShowDetails({navigation}) {
   return (
     <>
     <View style={styles.container}>
-<Nav role={route.params.user['role']} state={route.params.state} navigation={navigation} data={route.params.user}/>
+<Nav role='Admin' state={route.params.state} navigation={navigation} data={route.params.user} token={route.params.token}/>
         <View style={styles.topchart}>
         <View style={styles.one}>
-        <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',borderColor:'black',borderWidth:1,borderRadius:'50%',height:50,width:50}}>
+        <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',borderColor:'black',borderWidth:1,borderRadius:50,height:50,width:50}}>
             {name&&<Text style={{fontWeight:'bold',fontSize:25}}>{name.charAt(0)}</Text>}
         </View>
         <Text style={{fontSize:25}}>{name}</Text>

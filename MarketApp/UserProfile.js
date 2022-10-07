@@ -9,7 +9,7 @@ function UserProfile({navigation,name,role,email,phone,creates,id}) {
     <>
     <View style={styles.account}>
     <View style={styles.one}>
-        <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',borderColor:'black',borderWidth:1,borderRadius:'50%',height:50,width:50}}>
+        <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',borderColor:'black',borderWidth:1,borderRadius:50,height:50,width:50}}>
             {name&&<Text style={{fontWeight:'bold',fontSize:25}}>{name.charAt(0)}</Text>}
         </View>
         <Text style={{fontSize:25}}>{name}</Text>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 
     account:{
       width:"86%",
-      height:400,
+      height:450,
       shadowColor: '#6B8E23',
       shadowOffset: {width: 2, height: 4},
       shadowOpacity: 0.2,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
       display:'flex',
       flexDirection:'column',
       alignItems:'flex-start',
-      marginTop:20,
+      marginTop:28,
       justifyContent:'flex-start'
     },
     section:{
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
       alignItems:'center',
       gap:16,
       marginLeft:13,
-      marginTop:13
+      marginTop:22
     },
     section1:{
       width:"90%",

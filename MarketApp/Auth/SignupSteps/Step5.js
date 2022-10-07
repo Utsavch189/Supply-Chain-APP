@@ -13,7 +13,7 @@ function Step5({navigation}) {
       }
   
       if(password!=''){
-      navigation.navigate('Final',{
+      navigation.navigate('Verify',{
         fname:route.params.fname,
         lname:route.params.lname,
         number:route.params.number,

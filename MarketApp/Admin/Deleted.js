@@ -10,7 +10,7 @@ import UserCard from './Components/UserCard';
 
 function Deleted({navigation}) {
     const route=useRoute();
-    const user_data=route.params.data;
+    const user_data=route.params.user;
     
     
 
@@ -65,7 +65,7 @@ function Deleted({navigation}) {
 else{
   return (
     <>
-    <Nav role='Admin' state='deletes' navigation={navigation} data={route.params.data}/>
+    <Nav role='Admin' state='deletes' navigation={navigation} data={route.params.data} token={route.params.token}/>
     <View style={styles.container}>
       <View style={styles.searchbarcontainer}>
         <TextInput placeholder='Search By Name' 

@@ -10,7 +10,7 @@ import UserCard from './Components/UserCard';
 
 function Approved({navigation}) {
     const route=useRoute();
-    const user_data=route.params.data;
+    const user_data=route.params.user;
     const[token,setToken]=useState(null);
     const[req,setReq]=useState(null);
     const[searchh,setSearch]=useState([]);
@@ -63,7 +63,7 @@ function Approved({navigation}) {
 else{
   return (
     <>
-    <Nav role='Admin' state='approved' navigation={navigation} data={route.params.data} />
+    <Nav role='Admin' state='approved' navigation={navigation} data={route.params.user} token={route.params.token}/>
     <View style={styles.container}>
       <View style={styles.searchbarcontainer}>
         <TextInput placeholder='Search By Name' 

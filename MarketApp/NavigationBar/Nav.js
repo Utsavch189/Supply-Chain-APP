@@ -9,16 +9,16 @@ function Nav({role,state,navigation,data,token,additional_data}) {
         {role==='Admin'?
         <View style={styles.subcontainer}>
             <Icon name='home' color={state==='home'&&'blue'} size={25} onPress={()=>{navigation.navigate('Admin Home',{
-                user:data
+                user:data,token:token
             })}}/>
             <Icon name='users'color={state==='reqs'&&'blue'} size={25} onPress={()=>{navigation.navigate('Pendings',{
-                user:data
+                user:data,token:token
             })}}/>
             <Icon name='check'color={state==='approved'&&'blue'} size={25} onPress={()=>{navigation.navigate('Approved Users',{
-                user:data
+                user:data,token:token
             })}}/>              
             <Icon name='trash'color={state==='deletes'&&'blue'} size={25} onPress={()=>{navigation.navigate('Deleted Users',{
-                user:data
+                user:data,token:token
             })}}/>   
         </View>
 

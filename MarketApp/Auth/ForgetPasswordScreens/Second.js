@@ -21,6 +21,7 @@ function Second({navigation}) {
     useEffect(()=>{
         axios.post(`${url}/auth/sendotp`,{
             'email':route.params.email,
+            'type':'authenticated'
         })
         .catch(function (error) {
             console.log(error);
@@ -34,7 +35,8 @@ function Second({navigation}) {
             'f':first,
             's':second,
             't':third,
-            'fo':fourth
+            'fo':fourth,
+            
         })
         .then(function (response) {
           console.log(response)

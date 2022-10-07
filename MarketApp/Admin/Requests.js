@@ -11,7 +11,7 @@ import Loader from '../Loader';
 function Requests({navigation}) {
 
     const route=useRoute();
-    const user_data=route.params.data;
+    const user_data=route.params.user;
     const[token,setToken]=useState(null);
     const[req,setReq]=useState(null);
     const[searchh,setSearch]=useState([]);
@@ -66,7 +66,7 @@ function Requests({navigation}) {
     else{
   return (
     <>
-    <Nav state='reqs' role='Admin' data={route.params.data} navigation={navigation}/>
+    <Nav state='reqs' role='Admin' data={route.params.user} navigation={navigation} token={route.params.token}/>
     <View style={styles.container}>
       <View style={styles.searchbarcontainer}>
         <TextInput placeholder='Search By Name' 

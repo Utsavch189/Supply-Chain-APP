@@ -66,7 +66,7 @@ function AdminHome({navigation}) {
   },[token])
 
 
-  if(user.length===0){
+  if(!user){
     return(
       <Loader/>
     )
@@ -76,7 +76,7 @@ function AdminHome({navigation}) {
     <>
     
     <View style={styles.container}>
-    <Nav role='Admin' state='home' navigation={navigation} data={user}/>
+    <Nav role='Admin' state='home' navigation={navigation} data={user} token={token}/>
      <View style={styles.chart}>
        {data&&
         <PieChart

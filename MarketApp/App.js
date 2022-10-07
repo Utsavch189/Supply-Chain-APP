@@ -18,6 +18,7 @@ import Second from './Auth/ForgetPasswordScreens/Second';
 import axios from 'axios';
 import { url } from './baseUrl';
 import ActionBarLogo from './ActionBarLogo';
+import OtpVerify from './Auth/SignupSteps/OtpVerify';
 
 
 const Stack = createNativeStackNavigator();
@@ -85,6 +86,7 @@ export default function App() {
         <Stack.Screen name='Step 3' component={Step3} />
         <Stack.Screen name='Step 4' component={Step4} />
         <Stack.Screen name='Step 5' component={Step5} />
+        <Stack.Screen name='Verify' component={OtpVerify} />
         <Stack.Screen name='Final' component={Final} />
         <Stack.Screen name='First Step' component={First} />
         <Stack.Screen name='Second Step' component={Second} />
