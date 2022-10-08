@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, {  useState,useEffect } from 'react'
 import { StyleSheet, Text, View ,TextInput,TouchableOpacity,Image} from 'react-native';
 import axios from 'axios';
 import { url } from '../baseUrl';
@@ -10,9 +10,18 @@ function Login({navigation}) {
     const[userid,setUserid]=useState('');
     const[password,setPassword]=useState('');
     const[err,setErr]=useState(false);
+    const[ufocus,setUFocus]=useState(false);
+    const[pfocus,setPFocus]=useState(false);
     const[msg,setMsg]=useState('');
 
     const route=useRoute();
+
+    useEffect(()=>{
+        if(!userid && !password){
+            setPFocus(false)
+            setUFocus(false)
+        }
+    },[userid,password])
 
    const login=()=>{
     if(userid!='' && password!=''){
@@ -45,18 +54,18 @@ function Login({navigation}) {
         setErr(true);
     }
    }
-    
-
+ 
+   
   return (
    <>
 
    <View style={styles.container}>
 
     <View style={styles.topcontainer}>
-        <Image
+        {!pfocus&&!ufocus&&<Image
         source={login_logo}
-        style={{width:89,height:89}}
-        />
+        style={{width:89,height:89,position:'absolute',zIndex:-1000}}
+        />}
     </View>
 
     <View style={styles.subcontainer}>
@@ -64,6 +73,7 @@ function Login({navigation}) {
         <TextInput 
         style={styles.input}
         placeholder='User Id'
+        onFocus={()=>setUFocus(true)}
         onChangeText={(b)=>{setUserid(b)
         setErr(false)
         }}
@@ -72,12 +82,13 @@ function Login({navigation}) {
         <TextInput 
         style={styles.input}
         placeholder='Password'
+        onFocus={()=>setPFocus(true)}
         onChangeText={(b)=>{setPassword(b)
         setErr(false)
         }}
         />
 
-        <TouchableOpacity style={styles.button1} onPress={login}>
+        <TouchableOpacity style={styles.button1} onPress={()=>login()}>
             <Text style={styles.buttonText1}>Login</Text>
         </TouchableOpacity>
 
@@ -85,17 +96,24 @@ function Login({navigation}) {
             <Text>Didn't have any account?</Text>
         </View>
         <View style={{marginTop:9}}>
-        <TouchableOpacity  onPress={()=>navigation.navigate('First Step')}>
+        <TouchableOpacity  onPress={()=>{navigation.navigate('First Step')
+                            setPFocus(false)
+                            setUFocus(false)
+        }}>
             <Text style={{color:'black',fontWeight:'bold'}}>Forget Password?</Text>
         </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.button2} onPress={()=>navigation.navigate('Register')}>
+        <TouchableOpacity style={styles.button2} onPress={()=>{navigation.navigate('Register')
+                            setPFocus(false)
+                            setUFocus(false)
+        }}>
             <Text style={styles.buttonText2}>Sign Up</Text>
         </TouchableOpacity>
-        {err&&<Text style={{fontWeight:'bold',color:'red',marginTop:10}}>Fill the fields with credentials...</Text>}
-        {msg&&<Text style={{fontWeight:'bold',color:'red',marginTop:10}}>{msg}</Text>}
-        {route.params?.msgs&&<Text style={{fontWeight:'bold',color:'green',marginTop:10}}>{route.params.msgs}</Text>}
+        {!userid&&!password&&err&&<Text style={{fontWeight:'bold',color:'red',marginTop:10}}>Fill the fields with credentials...</Text>}
+        {!userid&&!password&&msg&&<Text style={{fontWeight:'bold',color:'red',marginTop:10}}>{msg}</Text>}
+        {!userid&&!password&&route.params?.msgs&&<Text style={{fontWeight:'bold',color:'green',marginTop:10}}>{route.params.msgs}</Text>}
+        {!userid&&!password&&route.params?.err&&<Text style={{fontWeight:'bold',color:'red',marginTop:10}}>{route.params.msgs}</Text>}
     </View>
 
    </View>  
@@ -139,7 +157,9 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         alignItems:'center',
         justifyContent:'center',
-        marginBottom:90
+        marginBottom:90,
+        position:'absolute',
+        zIndex:1000
 
     },
     input:{
@@ -148,7 +168,8 @@ const styles = StyleSheet.create({
         padding: 10,
         width:'80%',
         marginTop:10,
-        borderRadius:8
+        borderRadius:8,
+
     },
     button1:{
         width:'80%',

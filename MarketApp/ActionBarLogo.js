@@ -8,7 +8,7 @@ function ActionBarLogo() {
 
         <Image
         source={my_logo}
-        style={{width:25,height:25,marginLeft:16}}
+        style={{width:20,height:20,marginLeft:13}}
         />
 
    </>

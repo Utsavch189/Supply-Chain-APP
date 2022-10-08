@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { StyleSheet, Text, View} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 import { useRoute } from '@react-navigation/native';
+import axios from 'axios';
+import { url } from '../../baseUrl';
 
 var radio_props = [
   { value: 'Manufacturer' },
@@ -24,6 +26,13 @@ function Step4({navigation}) {
       role:b
     })
 }
+useEffect(()=>{
+  axios.post(`${url}/auth/is_block`,{
+    'email':route.params.email,
+    'phone':route.params.number,
+    'type':'not-authenticated'
+})
+},[])
 
 return (
   <>

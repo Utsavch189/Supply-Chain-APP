@@ -57,6 +57,11 @@ function OtpVerify({navigation}) {
                     password:route.params.password
                   })
             }
+            else if(res['data']['msg']==='max trying limit exceed'){
+                navigation.navigate('Login',{
+                    err:'max trying limit exceed'
+                  })
+            }
             else{
                 setErr(res['data']['msg'])
             }
@@ -112,7 +117,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-around',
         alignItems:'center',
         height:90,
-        marginTop:150
+        marginTop:50
     },
     fields1:{
         width:'70%',
@@ -121,7 +126,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-around',
         alignItems:'center',
         height:90,
-        marginTop:50
+        marginTop:10
     },
     btn:{
         width:'70%',
@@ -130,7 +135,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'blue',
-        marginTop:50
+        marginTop:25
       }
 })
 

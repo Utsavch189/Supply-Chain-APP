@@ -1,18 +1,44 @@
 import { useRoute } from '@react-navigation/native';
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { StyleSheet, Text, View,TouchableOpacity,TextInput} from 'react-native';
+import axios from 'axios';
+import { url } from '../../baseUrl';
+
 
 function Step5({navigation}) {
     const[password,setPassword]=useState('');
     const[err,setErr]=useState(false);
+    const[lock,setLock]=useState(false);
+    const[msg,setMsg]=useState('');
     const route=useRoute();
+
+
+    useEffect(()=>{
+      axios.post(`${url}/auth/is_block`,{
+        'email':route.params.email,
+        'phone':route.params.number,
+        'type':'not-authenticated'
+    })
+    .then(res=>{
+      if(res['data']['status']===400){
+        setLock(true);
+        setMsg('This email and phone number is not allowed to register now');
+      }
+      else{
+        setLock(false);
+      }
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+    },[])
   
     const press=()=>{
       if(password===''){
         setErr(true)
       }
   
-      if(password!=''){
+      if(password!=''&& !lock){
       navigation.navigate('Verify',{
         fname:route.params.fname,
         lname:route.params.lname,
@@ -42,8 +68,10 @@ function Step5({navigation}) {
             <TextInput style={styles.input2} keyboardType="visible-password" onChangeText={(b)=>{setPassword(b)
             setErr(false)
             }}/>
+            {msg&&<Text style={{fontWeight:'bold',color:'red',marginTop:7}}>{msg}</Text>}
     </View>
-    {err&&<Text style={{fontWeight:'bold',color:'red',marginTop:5}}>must enter password...</Text>}
+    {!msg&&err&&<Text style={{fontWeight:'bold',color:'red',marginTop:5}}>must enter password...</Text>}
+    
     <TouchableOpacity style={styles.btn} onPress={press}>
           <Text style={{color:'white'}}>Next</Text>
       </TouchableOpacity>
