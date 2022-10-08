@@ -22,12 +22,13 @@ function AddProduct({navigation}) {
   
 
     useEffect(()=>{
-      myaxios(JSON.parse(route.params.token)).get(`${url}/manufacturer/get_products`)
+      console.log(route.params.token)
+      if(route.params.token){myaxios(JSON.parse(route.params.token)).get(`${url}/manufacturer/get_products`)
       .then(res=>{setData(res['data'].data)
-                  console.log(res)
-    })
+               
+    })}
       setSearch([])
-    },[visible,aboutvisible])
+    },[visible,aboutvisible,route.params.token])
 
     const Search=(b)=>{
       if(data){

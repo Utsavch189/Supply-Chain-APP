@@ -90,9 +90,9 @@ function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint
 
   return (
     <>
-     <View style={{ backgroundColor:'white',position:'absolute',top:"50%",left:"50%",transform:"translate(-50%,-50%)",height:680,width:"90%"}}>
+     <View style={{ backgroundColor:'white',position:'absolute',height:680,width:"90%"}}>
     <Modal isVisible={is_visible} >
-        <View style={{ backgroundColor:'white',height:650,width:"90%",display:'flex',flexDirection:'column',alignItems:'center',position:'absolute',top:"50%",left:"50%",transform:"translate(-50%,-50%)",}}>
+        <View style={{ backgroundColor:'white',height:650,width:"100%",display:'flex',flexDirection:'column',alignItems:'center',position:'absolute'}}>
           {msg&&<Text style={{fontWeight:'bold'}}>{msg}</Text>}
         <View style={{ width:"90%",display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',position:'absolute',top:0,marginTop:5}}>
                 <TouchableOpacity onPress={()=>set(false)}>
