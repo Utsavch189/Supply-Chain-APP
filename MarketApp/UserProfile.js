@@ -32,11 +32,6 @@ function UserProfile({navigation,name,role,email,phone,creates,id}) {
 
 
       <View style={styles.section}>
-        <Icon name='info' size={25}/>
-        <Text style={{fontSize:20}}>{creates}</Text>
-      </View>
-
-      <View style={styles.section}>
         <Icon name='vcard' size={25}/>
         <Text style={{fontSize:15}}>{id}</Text>
       </View>

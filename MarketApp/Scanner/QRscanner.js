@@ -34,20 +34,20 @@ function QRscanner({token,get_p_endpoint,get_user_endpoint,post_distribute_endpo
   return (
     <>
      <View style={styles.container}>
-     <View style={{width:"90%",height:40,display:'flex',flexDirection:'row',gap:5,alignItems:'center',marginTop:25,position:'absolute',top:0}}>
-      <TextInput onChangeText={(b)=>setText(b)} style={styles.input}/>
+     <View style={{width:"80%",height:40,display:'flex',flexDirection:'row',gap:9,alignItems:'center',marginTop:25,position:'absolute',top:0}}>
+      <TextInput onChangeText={(b)=>setText(b)} style={styles.input} placeholder='Put Id'/>
     <Button title={'Search'} onPress={() => {setScanned(false)
       setIs_visible(true)
       }} color='blue' 
       />
       </View>
-      <Text style={{marginBottom:50,fontWeight:'bold',fontSize:18}}>OR</Text>
+      
       <View style={styles.barcodebox}>
         {text===''&&<BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }} />}
+          style={{ height: 400, width: 700 }} />}
       </View>
-      {(text && is_visible)&&<AfterScan is_visible={true} set={setIs_visible} token={token} userID={text} get_p_endpoint={get_p_endpoint} get_user_endpoint={get_user_endpoint} post_distribute_endpoint={post_distribute_endpoint} post_dayBydaydistribute_endpoint={post_dayBydaydistribute_endpoint} state={state}/>}
+      {is_visible&&text &&<AfterScan is_visible={true} set={setIs_visible} token={token} userID={text} get_p_endpoint={get_p_endpoint} get_user_endpoint={get_user_endpoint} post_distribute_endpoint={post_distribute_endpoint} post_dayBydaydistribute_endpoint={post_dayBydaydistribute_endpoint} state={state}/>}
 
       {scanned&&text==='' && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
       
@@ -73,16 +73,16 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       height: 300,
-      width: 300,
+      width: 400,
       overflow: 'hidden',
       borderRadius: 30,
-      backgroundColor: 'tomato'
     },
     input:{
       width:"80%",
-      height:30,
+      height:35,
       borderWidth:1,
-      borderColor:'black'
+      borderColor:'black',
+      padding:5
     }
   });
 

@@ -12,12 +12,12 @@ import Loader from '../Loader';
 
 
 const chartConfig = {
-  backgroundGradientFrom: "#0b70a8",
+  backgroundGradientFrom: "#1E2923",
   backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: "#0b70a8",
+  backgroundGradientTo: "#08130D",
   backgroundGradientToOpacity: 0.5,
-  color: (opacity = 1) => `rgba(92, 49, 245, ${opacity})`,
-  labelColor: (opacity = 1) => `rgba(92, 49, 245, ${opacity})`,
+  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+  labelColor: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
   strokeWidth: 2, // optional, default 3
   barPercentage: 0.5,
   useShadowColorFromDataset: false // optional
@@ -63,6 +63,7 @@ function AdminHome({navigation}) {
       myaxios(JSON.parse(token)).get(`${url}/admins/numbers_of_users`)
       .then(res=>setData(res['data']))
     }
+    console.log(data)
   },[token])
 
 

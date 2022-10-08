@@ -34,7 +34,7 @@ function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint
   const[msg,setMsg]=useState('');
 
   useEffect(()=>{
-    myaxios(JSON.parse(token)).get(`${url}/${get_p_endpoint}`)
+    if(token && get_p_endpoint && get_user_endpoint){myaxios(JSON.parse(token)).get(`${url}/${get_p_endpoint}`)
     .then(res=>{
       if(state==='distributor'||state==='retailer'){
         for(let i=0;i<res['data'].products.length;i++){
@@ -61,7 +61,7 @@ function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint
     .then(res=>{
       setUser(res['data'].user)
                 setHistory(res['data'].history)
-  })
+  })}
   },[token,get_p_endpoint,get_user_endpoint])
 
   const distribute=()=>{
@@ -87,9 +87,6 @@ function AfterScan({is_visible,token,set,userID,get_p_endpoint,get_user_endpoint
   }
   }
 
-  if(!data){
-    return(<Loader/>)
-  }
 
   return (
     <>

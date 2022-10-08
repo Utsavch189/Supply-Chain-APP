@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     btn:{
         height:33,
         width:81,
-        borderRadius:'70%',
+        borderRadius:70,
         backgroundColor:'#e7f1fe',
         display:'flex',
         flexDirection:'column',
