@@ -14,7 +14,7 @@ function Signup({navigation}) {
       source={signup1}
     />
 
-    <Text style={{fontWeight:'bold',fontSize:20,marginTop:30}}>Join Shop Community</Text>
+    <Text style={{fontWeight:'bold',fontSize:20,marginTop:30}}>Join U-HUB Community</Text>
     <Text style={{marginTop:15}}>We will help you create a new account in a few easy steps.</Text>
 
     <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate('Step 1')}>

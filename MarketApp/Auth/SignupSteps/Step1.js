@@ -86,10 +86,12 @@ const styles = StyleSheet.create({
 
   },
   inputbox1:{
-    width:'48%'
+    width:'48%',
+    padding:11
 
   },inputbox2:{
-    width:'48%'
+    width:'48%',
+    padding:11
   },
   input1:{
     width:'100%',
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
     borderWidth:0.5
   },
   btn:{
-    width:'100%',
+    width:'90%',
     height:33,
     display:'flex',
     justifyContent:'center',

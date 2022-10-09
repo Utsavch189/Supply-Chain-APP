@@ -22,7 +22,8 @@ function Step5({navigation}) {
     .then(res=>{
       if(res['data']['status']===400){
         setLock(true);
-        setMsg('This email and phone number is not allowed to register now');
+        setMsg(`This email and phone number will be allowed to register after ${res['data']['time-left']} mins`);
+        console.log(res)
       }
       else{
         setLock(false);
@@ -65,7 +66,8 @@ function Step5({navigation}) {
   
     <View style={styles.inputbox1}>
             <Text>New Password</Text>
-            <TextInput style={styles.input2} keyboardType="visible-password" onChangeText={(b)=>{setPassword(b)
+            <TextInput style={styles.input2}
+            secureTextEntry={true} keyboardType="visible-password" onChangeText={(b)=>{setPassword(b)
             setErr(false)
             }}/>
             {msg&&<Text style={{fontWeight:'bold',color:'red',marginTop:7}}>{msg}</Text>}

@@ -82,6 +82,7 @@ function Login({navigation}) {
         <TextInput 
         style={styles.input}
         placeholder='Password'
+        secureTextEntry={true}
         onFocus={()=>setPFocus(true)}
         onChangeText={(b)=>{setPassword(b)
         setErr(false)
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
         width:'80%',
         marginTop:10,
         borderRadius:8,
-
+        padding:8
     },
     button1:{
         width:'80%',
