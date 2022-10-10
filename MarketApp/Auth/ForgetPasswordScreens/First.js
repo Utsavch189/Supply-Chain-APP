@@ -50,7 +50,7 @@ function First({navigation}) {
 
         <View style={styles.inputbox1}>
             <Text>New Password</Text>
-            <TextInput style={styles.input1}  onChangeText={(b)=>{setPassword(b)
+            <TextInput style={styles.input1} secureTextEntry={true}  onChangeText={(b)=>{setPassword(b)
             setErr(false)
             setErr2('')
             }}/>
@@ -58,7 +58,7 @@ function First({navigation}) {
   
         <View style={styles.inputbox2}>
             <Text>Confirm New Password</Text>
-            <TextInput style={styles.input2}  onChangeText={(b)=>{setconfirmPassword(b)
+            <TextInput style={styles.input2} secureTextEntry={true} onChangeText={(b)=>{setconfirmPassword(b)
             setErr(false)
             setErr2('')
             }}/>
@@ -90,7 +90,7 @@ function First({navigation}) {
         alignItems:'center'
       },
       subcontainer:{
-        width:'92%',
+        width:'80%',
         height:'70%',
         marginTop:38,
         display:'flex',
@@ -98,12 +98,12 @@ function First({navigation}) {
         alignItems:'center',
       },
       subcontainer1:{
-          width:'82%',
+          width:'80%',
           height:40,
           marginTop:5,
         },
       inputboxcontainer:{
-        width:'100%',
+        width:'90%',
         height:100,
         marginTop:25,
   
@@ -129,7 +129,7 @@ function First({navigation}) {
         borderWidth:0.5
       },
       btn:{
-        width:'100%',
+        width:'90%',
         height:33,
         display:'flex',
         justifyContent:'center',

@@ -88,7 +88,9 @@ function ManufacturerHome({navigation}) {
       <Text style={{fontWeight:'bold',marginTop:11}}>Today's Production</Text>
      </View>
 
-      <UserProfile navigation={navigation} name={user['name']} role={user['role']} email={user['uid']} phone={user['phone']} creates={user['account_creates']} id={user['id']}/>
+<UserProfile navigation={navigation} name={user['name']} role={user['role']} email={user['uid']} phone={user['phone']} creates={user['account_creates']} id={user['id']}/>
+
+      
 
        
     </View>

@@ -58,13 +58,13 @@ const styles = StyleSheet.create({
 
     account:{
       width:"86%",
-      height:450,
+      height:480,
       shadowColor: '#6B8E23',
       shadowOffset: {width: 2, height: 4},
       shadowOpacity: 0.2,
       shadowRadius: 3.6,   
       position:'absolute',
-      marginTop:150,
+      marginTop:230,
       overflow:'hidden',
 
     },
