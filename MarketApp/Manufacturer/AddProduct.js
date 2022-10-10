@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
       justifyContent:'center',     
     },
     addbtn:{
-      borderRadius:"50%",
+      borderRadius:50,
       height:70,
       width:70,
       position:'fixed',

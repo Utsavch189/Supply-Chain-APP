@@ -37,7 +37,14 @@ export default function App() {
               setToken(val)
               axios.post(`${url}/auth/refresh_token`,{"token":JSON.parse(val)})
               .then(res=>{if(res['data'].status===200){
+                if(res['data'].msg==='delete'){
+                  console.log('Password Expired')
+                  AsyncStorage.removeItem('token')
+                }
+                else{
+                console.log('Refresh token placed')
                 AsyncStorage.setItem('token',JSON.stringify(res['data'].token))
+                }
               }})
               
             }

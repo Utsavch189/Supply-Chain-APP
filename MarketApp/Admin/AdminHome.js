@@ -63,7 +63,6 @@ function AdminHome({navigation}) {
       myaxios(JSON.parse(token)).get(`${url}/admins/numbers_of_users`)
       .then(res=>setData(res['data']))
     }
-    console.log(data)
   },[token])
 
 
