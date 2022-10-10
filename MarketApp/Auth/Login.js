@@ -93,18 +93,26 @@ function Login({navigation}) {
             <Text style={styles.buttonText1}>Login</Text>
         </TouchableOpacity>
 
-        <View style={{marginTop:17}}>
-            <Text>Didn't have any account?</Text>
-        </View>
-        <View style={{marginTop:9}}>
+      
+        <View style={{marginTop:18,display:'flex',flexDirection:'row',justifyContent:'space-around',alignItems:'center',width:'70%'}}>
         <TouchableOpacity  onPress={()=>{navigation.navigate('First Step')
                             setPFocus(false)
                             setUFocus(false)
         }}>
+            
             <Text style={{color:'black',fontWeight:'bold'}}>Forget Password?</Text>
         </TouchableOpacity>
+        <Text>|</Text>
+        <TouchableOpacity onPress={()=>{navigation.navigate('Setup')
+                            setPFocus(false)
+                            setUFocus(false)
+        }}>     
+            <Text style={{color:'black',fontWeight:'bold'}}>Create New Password?</Text>
+        </TouchableOpacity>
         </View>
-
+        <View style={{marginTop:17}}>
+            <Text>Didn't have any account?</Text>
+        </View>
         <TouchableOpacity style={styles.button2} onPress={()=>{navigation.navigate('Register')
                             setPFocus(false)
                             setUFocus(false)

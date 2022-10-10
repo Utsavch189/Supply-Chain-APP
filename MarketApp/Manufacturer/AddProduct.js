@@ -22,10 +22,8 @@ function AddProduct({navigation}) {
   
 
     useEffect(()=>{
-      console.log(route.params.token)
       if(route.params.token){myaxios(JSON.parse(route.params.token)).get(`${url}/manufacturer/get_products`)
       .then(res=>{setData(res['data'].data)
-               
     })}
       setSearch([])
     },[visible,aboutvisible,route.params.token])
@@ -117,7 +115,6 @@ const styles = StyleSheet.create({
       borderRadius:50,
       height:70,
       width:70,
-      position:'fixed',
       bottom:0,
       right:0,
       zIndex:10000,
@@ -133,7 +130,8 @@ const styles = StyleSheet.create({
       shadowOffset: {width: -2, height: 4},
       shadowOpacity: 0.2,
       shadowRadius: 3,
-      backgroundColor:"#ACC0FE"
+      backgroundColor:"#ACC0FE",
+      position:'absolute'
     },
     searchbarcontainer:{
       position:'absolute',

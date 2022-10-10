@@ -25,9 +25,9 @@ function AddProductModal({is_visible,set,token}) {
 
 
   return (
-    <View style={{ backgroundColor:'white',position:'absolute',top:"50%",left:"50%",transform:"translate(-50%,-50%)",height:480,width:"90%"}}>
+    <View style={{ backgroundColor:'white',position:'absolute',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:480,width:"90%"}}>
     <Modal isVisible={is_visible}>
-        <View style={{ backgroundColor:'white',position:'absolute',top:"50%",left:"50%",transform:"translate(-50%,-50%)",height:480,width:"90%",display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
+        <View style={{ backgroundColor:'white',position:'absolute',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:480,width:"100%",display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
           <View style={{ width:"90%",display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between',position:'absolute',top:0,marginTop:5}}>
                 <Text style={{fontSize:10,fontWeight:'bold'}}>Add or Update Your Launched Product</Text>
                 <TouchableOpacity onPress={()=>set(false)}>

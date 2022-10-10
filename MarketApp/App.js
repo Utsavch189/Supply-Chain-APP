@@ -19,6 +19,8 @@ import axios from 'axios';
 import { url } from './baseUrl';
 import ActionBarLogo from './ActionBarLogo';
 import OtpVerify from './Auth/SignupSteps/OtpVerify';
+import Setup from './Auth/CreateNewPasswordSteps/Setup';
+import Verification from './Auth/CreateNewPasswordSteps/Verification';
 
 
 const Stack = createNativeStackNavigator();
@@ -97,7 +99,8 @@ export default function App() {
         <Stack.Screen name='Final' component={Final} />
         <Stack.Screen name='First Step' component={First} />
         <Stack.Screen name='Second Step' component={Second} />
-        
+        <Stack.Screen name='Setup' component={Setup} />
+        <Stack.Screen name='Verification' component={Verification} />
       </Stack.Navigator>
     </NavigationContainer>
 </>
