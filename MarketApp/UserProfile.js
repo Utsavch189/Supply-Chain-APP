@@ -57,7 +57,7 @@ function UserProfile({navigation,name,role,email,phone,creates,id}) {
 const styles = StyleSheet.create({
 
     account:{
-      width:"86%",
+      width:"89%",
       height:480,
       shadowColor: '#6B8E23',
       shadowOffset: {width: 2, height: 4},
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
       justifyContent:'flex-start'
     },
     section:{
-      width:"90%",
+      width:"100%",
       display:'flex',
       flexDirection:'row',
       alignItems:'center',
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
       marginTop:22
     },
     section1:{
-      width:"90%",
+      width:"100%",
       display:'flex',
       flexDirection:'row',
       alignItems:'center',
