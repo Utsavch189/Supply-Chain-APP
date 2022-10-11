@@ -43,7 +43,7 @@ function QRscanner({token,get_p_endpoint,get_user_endpoint,post_distribute_endpo
       </View>
       
       <View style={styles.barcodebox}>
-        {text===''&&<BarCodeScanner
+        {<BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={{ height: 400, width: 700 }} />}
       </View>
