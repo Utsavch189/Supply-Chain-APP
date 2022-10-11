@@ -41,6 +41,9 @@ function Login({navigation}) {
                         console.log(err)
                     }
                 }
+                else if(response.data['status']===253){
+                    setMsg(response.data['msg']);
+                }
                 else{
                     setMsg(response.data['msg']);
                 }
