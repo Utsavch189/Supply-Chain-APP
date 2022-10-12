@@ -79,7 +79,7 @@ function ManufacturerHome({navigation}) {
     <View style={styles.container}>
     <Nav role='Manufacturer' state='home' navigation={navigation} data={user} token={token}/>
      <View style={styles.chart}>
-       {data?.length&&
+       {data&&
         <PieChart
         data={data}
         width={screenWidth}
