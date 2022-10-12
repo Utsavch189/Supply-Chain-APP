@@ -43,7 +43,13 @@ function DistributeR({navigation}) {
   }
 
   if(!data){
-    return(<Loader/>)
+    return(
+      <>
+      <Nav role='Retailer' state='distribute' navigation={navigation} data={route.params.user} token={route.params.token}/>
+      <Loader/>
+      </>
+    
+    )
   }
 
   return (

@@ -35,7 +35,6 @@
     "react-native-element-dropdown": "^2.3.0",
     "react-native-element-timer": "^2.0.0",
     "react-native-fontawesome": "^7.0.0",
-    "react-native-gifted-charts": "^1.2.41",
     "react-native-image-picker": "^4.10.0",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-modal": "^13.0.1",
@@ -50,11 +49,11 @@
     "react-native-simple-radio-button": "^2.7.4",
     "react-native-skeleton-content": "^1.0.25",
     "react-native-skeleton-placeholder": "^5.0.0",
-    "react-native-svg": "^13.4.0",
     "react-native-table-component": "^1.2.2",
     "react-native-textarea": "^1.0.4",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-web": "~0.18.7"
+    "react-native-web": "~0.18.7",
+    "react-native-svg": "12.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

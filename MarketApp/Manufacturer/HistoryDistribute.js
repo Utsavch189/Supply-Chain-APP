@@ -26,6 +26,7 @@ function HistoryDistribute({navigation}) {
     if(!data){
         return(
           <>
+          <Nav role='Manufacturer' state='history' navigation={navigation} data={route.params.user} token={route.params.token}/>
           <Loader/>
           </>
         )

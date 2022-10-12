@@ -71,7 +71,7 @@ function UserShowDetails({navigation}) {
         <View style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',borderColor:'black',borderWidth:1,borderRadius:50,height:50,width:50}}>
             {name&&<Text style={{fontWeight:'bold',fontSize:25}}>{name.charAt(0)}</Text>}
         </View>
-        <Text style={{fontSize:25}}>{name}</Text>
+        <Text style={{fontSize:25,marginLeft:10}}>{name}</Text>
     </View>
             <Text style={{fontSize:14,fontWeight:'bold'}}>{msg}</Text>
         </View>

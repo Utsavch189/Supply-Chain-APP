@@ -67,7 +67,11 @@ function RetailerHome({navigation}) {
   
     if(user.length===0 && !data){
         return(
+          <>
+          <Nav role='Retailer' state='home' navigation={navigation} data={user} token={token} additional_data={overalldata}/>
           <Loader/>
+          </>
+          
         )
       }
 

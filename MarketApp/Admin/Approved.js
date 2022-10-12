@@ -55,6 +55,7 @@ function Approved({navigation}) {
     if(!req){
       return(
         <>
+        <Nav role='Admin' state='approved' navigation={navigation} data={route.params.user} token={route.params.token}/>
         <Loader/>
         </>
       )

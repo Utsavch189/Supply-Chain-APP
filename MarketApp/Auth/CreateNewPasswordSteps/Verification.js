@@ -45,6 +45,11 @@ function Verification({navigation}) {
               msgs:"New Password Created!"
             })
             }
+            else if(response['data']['msg']==='max trying limit exceed'){
+              navigation.navigate('Login',{
+                  err:'max trying limit exceed'
+                })
+          }
             else{
               setErr(response['data']['msg'])
             }

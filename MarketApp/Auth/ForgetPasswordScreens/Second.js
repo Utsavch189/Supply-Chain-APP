@@ -45,9 +45,14 @@ function Second({navigation}) {
               msgs:response['data']['msg']
             })
             }
-            else{
+            else if(response['data']['msg']==='max trying limit exceed'){
+              navigation.navigate('Login',{
+                  err:'max trying limit exceed'
+                })
+          }
+          else{
               setErr(response['data']['msg'])
-            }
+          }
         })
         .catch(function (error) {
             console.log(error);
@@ -67,6 +72,7 @@ function Second({navigation}) {
             <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={second} onChangeText={(b)=>setSecond(b)} />
             <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={third} onChangeText={(b)=>setThird(b)} />
             <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={fourth} onChangeText={(b)=>setFourth(b)} />
+
         </View>
         {err&&<Text style={{fontWeight:'bold',color:'red',marginTop:15}}>{err}</Text>}
         <TouchableOpacity style={styles.btn} onPress={press}>

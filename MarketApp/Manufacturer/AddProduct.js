@@ -42,6 +42,7 @@ function AddProduct({navigation}) {
     if(!data){
       return(
         <>
+        <Nav role='Manufacturer' state='add_products' navigation={navigation} data={route.params.user} token={route.params.token}/>
         <Loader/>
         </>
       )

@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View ,TextInput,TouchableOpacity} from 'react-native';
+import axios from 'axios';
+import { url } from '../../baseUrl';
 
 function Setup({navigation}) {
     const[password,setPassword]=useState('');
@@ -7,13 +9,15 @@ function Setup({navigation}) {
     const[confirmPassword,setconfirmPassword]=useState('');
     const[err,setErr]=useState(false);
     const[err2,setErr2]=useState('');
+    const[lock,setLock]=useState(false);
+    const[msg,setMsg]=useState('');
 
     const press=()=>{
       if(password==='' || email==='' || confirmPassword!=''){
         setErr(true)
       }
   
-      if(password==='' || email==='' || confirmPassword!=''){
+      if(password!=='' && email!=='' && confirmPassword!=='' && !lock){
         if(password===confirmPassword){
             navigation.navigate('Verification',{
                 email:email,
@@ -27,7 +31,25 @@ function Setup({navigation}) {
     }
     }
     
-  
+    useEffect(()=>{
+      axios.post(`${url}/auth/is_block`,{
+        'email':email,'phone':''
+    })
+    .then(res=>{
+      if(res['data']['status']===400){
+        setLock(true);
+        setMsg(`This email and phone number will be allowed to register after ${res['data']['time-left']} mins`);
+        console.log(res)
+      }
+      else{
+        setLock(false);
+      }
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+    },[email])
+
     return (
   <>
   
@@ -66,6 +88,7 @@ function Setup({navigation}) {
   
         {err&&<Text style={{fontWeight:'bold',color:'red',marginTop:5}}>Fill the fields...</Text>}
         {err2&&<Text style={{fontWeight:'bold',color:'red',marginTop:5}}>{err2}</Text>}
+        {lock&&msg&&<Text style={{fontWeight:'bold',color:'red',marginTop:7}}>{msg}</Text>}
     </View>
     
   
@@ -135,7 +158,7 @@ function Setup({navigation}) {
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'blue',
-        marginTop:128
+        marginTop:148
       }
     });
 

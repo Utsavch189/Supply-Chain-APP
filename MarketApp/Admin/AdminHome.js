@@ -68,7 +68,11 @@ function AdminHome({navigation}) {
 
   if(!user){
     return(
+      <>
+      <Nav role='Admin' state='home' navigation={navigation} data={user} token={token}/>
       <Loader/>
+      </>
+      
     )
   }
 

@@ -58,6 +58,7 @@ function Requests({navigation}) {
     if(!req){
       return(
         <>
+        <Nav state='reqs' role='Admin' data={route.params.user} navigation={navigation} token={route.params.token}/>
         <Loader/>
         </>
       )

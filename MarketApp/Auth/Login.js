@@ -42,7 +42,7 @@ function Login({navigation}) {
                     }
                 }
                 else if(response.data['status']===253){
-                    AsyncStorage.removeItem('token');
+
                     setMsg(response.data['msg']);
                 }
                 else{

@@ -17,7 +17,6 @@ const chartConfig = {
     backgroundGradientToOpacity: 0.5,
     color: (opacity = 1) => `rgba(92, 49, 245, ${opacity})`,
     labelColor: (opacity = 1) => `rgba(92, 49, 245, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
     barPercentage: 0.5,
     useShadowColorFromDataset: false // optional
   };
@@ -59,13 +58,19 @@ function ManufacturerHome({navigation}) {
       retrieveData();
       if(token){
         myaxios(JSON.parse(token)).get(`${url}/manufacturer/get_DayByDayEntry`)
-        .then(res=>setData(res['data'].data))
+        .then(res=>{setData(res['data'].data)
+                    console.log(res['data'].data)
+      })
       }
     },[token])
   
     if(user.length===0){
         return(
+          <>
+          <Nav role='Manufacturer' state='home' navigation={navigation} data={user} token={token}/>
           <Loader/>
+          </>
+          
         )
       }
 
@@ -74,7 +79,7 @@ function ManufacturerHome({navigation}) {
     <View style={styles.container}>
     <Nav role='Manufacturer' state='home' navigation={navigation} data={user} token={token}/>
      <View style={styles.chart}>
-       {data&&
+       {data?.length&&
         <PieChart
         data={data}
         width={screenWidth}
@@ -127,10 +132,6 @@ const styles = StyleSheet.create({
       flexDirection:'column',
       alignItems:'center',
       justifyContent:'center',
-      shadowColor: '#556B2F',
-      shadowOffset: {width: -2, height: 5},
-      shadowOpacity: 0.2,
-      shadowRadius: 3.6,   
       position:'absolute',
       top:0,
       marginTop:12

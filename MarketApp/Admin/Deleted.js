@@ -58,6 +58,7 @@ function Deleted({navigation}) {
     if(!req){
       return(
         <>
+        <Nav role='Admin' state='deletes' navigation={navigation} data={route.params.data} token={route.params.token}/>
         <Loader/>
         </>
       )
