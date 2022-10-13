@@ -16,9 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth.hashers import make_password,check_password
-from Auth.models import OTP
 from datetime import date
-
+from Auth.models import OTP
 
 
 admin.site.site_header='U-HUB Administrator'
@@ -42,4 +41,3 @@ if OTP.objects.exists():
         created_date=obj.values('created_at_date')[i]['created_at_date'].strftime('%m/%d/%Y')
         if(date.today().strftime('%m/%d/%Y')!=created_date):
             obj.delete()
-#print(make_password('admin'))

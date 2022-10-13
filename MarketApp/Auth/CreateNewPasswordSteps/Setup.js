@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View ,TextInput,TouchableOpacity} from 'react-native';
 import axios from 'axios';
 import { url } from '../../baseUrl';
@@ -32,7 +32,7 @@ function Setup({navigation}) {
     }
     
     useEffect(()=>{
-      axios.post(`${url}/auth/is_block`,{
+        if(email){axios.post(`${url}/auth/is_block`,{
         'email':email,'phone':''
     })
     .then(res=>{
@@ -47,8 +47,12 @@ function Setup({navigation}) {
     })
     .catch(function (error) {
         console.log(error);
-    });
-    },[email])
+    });}
+    if(password.length!==6){
+      setErr2("password have to six characters");
+      setLock(true);
+    }
+    },[email,password])
 
     return (
   <>

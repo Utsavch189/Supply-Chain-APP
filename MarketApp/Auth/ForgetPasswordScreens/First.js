@@ -31,7 +31,7 @@ function First({navigation}) {
     }
     }
     useEffect(()=>{
-      axios.post(`${url}/auth/is_block`,{
+     if(email){ axios.post(`${url}/auth/is_block`,{
         'email':email,'phone':''
     })
     .then(res=>{
@@ -46,8 +46,12 @@ function First({navigation}) {
     })
     .catch(function (error) {
         console.log(error);
-    });
-    },[email])
+    });}
+    if(password.length!==6){
+      setErr2("password have to six characters");
+      setLock(true);
+    }
+    },[email,password])
   
     return (
   <>

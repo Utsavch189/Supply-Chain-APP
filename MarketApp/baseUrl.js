@@ -1,1 +1,1 @@
-export const url = 'https://server1139.herokuapp.com'
+export const url = 'https://uhubserver.herokuapp.com'

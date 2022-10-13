@@ -10,11 +10,12 @@ function Step5({navigation}) {
     const[err,setErr]=useState(false);
     const[lock,setLock]=useState(false);
     const[msg,setMsg]=useState('');
+    const[err2,setErr2]=useState('');
     const route=useRoute();
 
 
     useEffect(()=>{
-      axios.post(`${url}/auth/is_block`,{
+      if(route.params.email && route.params.number){axios.post(`${url}/auth/is_block`,{
         'email':route.params.email,
         'phone':route.params.number,
         'type':'not-authenticated'
@@ -31,8 +32,14 @@ function Step5({navigation}) {
     })
     .catch(function (error) {
         console.log(error);
-    });
-    },[])
+    });}
+
+    if(password.length!==6){
+      setErr2("password have to six characters");
+      setLock(true);
+    }
+
+    },[password])
   
     const press=()=>{
       if(password===''){
@@ -71,6 +78,7 @@ function Step5({navigation}) {
             setErr(false)
             }}/>
             {msg&&<Text style={{fontWeight:'bold',color:'red',marginTop:7}}>{msg}</Text>}
+            {err2&&<Text style={{fontWeight:'bold',color:'red',marginTop:5}}>{err2}</Text>}
     </View>
     {!msg&&err&&<Text style={{fontWeight:'bold',color:'red',marginTop:5}}>must enter password...</Text>}
     
@@ -118,7 +126,7 @@ function Step5({navigation}) {
           justifyContent:'center',
           alignItems:'center',
           backgroundColor:'blue',
-          marginTop:43
+          marginTop:48
         }
     });
 
