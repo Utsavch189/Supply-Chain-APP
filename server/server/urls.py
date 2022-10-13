@@ -19,13 +19,7 @@ from django.contrib.auth.hashers import make_password,check_password
 from Auth.models import OTP
 from datetime import date
 
-obj=OTP.objects.all()
 
-
-for i in range(0,obj.count()):
-    created_date=obj.values('created_at_date')[i]['created_at_date'].strftime('%m/%d/%Y')
-    if(date.today().strftime('%m/%d/%Y')!=created_date):
-        obj.delete()
 
 admin.site.site_header='U-HUB Administrator'
 admin.site.site_title='U-HUB Portal'
@@ -41,3 +35,11 @@ urlpatterns = [
     path('distributor/',include('Distributor.urls')),
     path('retailer/',include('Retailer.urls'))
 ]
+
+if OTP.objects.exists():
+    obj=OTP.objects.all()
+    for i in range(0,obj.count()):
+        created_date=obj.values('created_at_date')[i]['created_at_date'].strftime('%m/%d/%Y')
+        if(date.today().strftime('%m/%d/%Y')!=created_date):
+            obj.delete()
+#print(make_password('admin'))

@@ -29,6 +29,7 @@ const go=()=>{
           msgs:response['data']['msg']
         })
         }
+        else if(response['data']['msg']==="Email Already Exists"){setErr("Email Already Exists Try another email")}
         else{
           setErr(response['data']['msg'])
         }

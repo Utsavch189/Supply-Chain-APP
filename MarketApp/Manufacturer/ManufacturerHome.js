@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     },
     chart:{
       width:"90%",
-      height:210,
+      height:160,
       display:'flex',
       flexDirection:'column',
       alignItems:'center',
