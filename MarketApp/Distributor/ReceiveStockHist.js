@@ -14,8 +14,11 @@ function ReceiveStockHist({navigation}) {
     const[data,setData]=useState(null);
 
     useEffect(()=>{
-      if(route.params.token){myaxios(JSON.parse(route.params.token)).get(`${url}/distributor/receive_stock_history`)
+      
+      if(route.params.token){
+        myaxios(JSON.parse(route.params.token)).get(`${url}/distributor/receive_stock_history`)
       .then(res=>{
+        console.log(res)
         setData(res['data'].data);
         setHead(res['data'].head);
       })}
