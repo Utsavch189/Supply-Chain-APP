@@ -3,6 +3,9 @@ import { StyleSheet, Text, View ,TextInput,TouchableOpacity} from 'react-native'
 import axios from 'axios';
 import { url } from '../../baseUrl';
 
+
+
+
 function Setup({navigation}) {
     const[password,setPassword]=useState('');
     const[email,setEmail]=useState('');
@@ -32,6 +35,7 @@ function Setup({navigation}) {
     }
     
     useEffect(()=>{
+
         if(email){axios.post(`${url}/auth/is_block`,{
         'email':email,'phone':''
     })
