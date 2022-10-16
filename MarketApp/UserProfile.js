@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 
     account:{
       width:"89%",
-      height:380,
+      height:430,
       shadowColor: '#6B8E23',
       shadowOffset: {width: 2, height: 4},
       shadowOpacity: 0.2,
