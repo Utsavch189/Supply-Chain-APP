@@ -26,10 +26,9 @@ import Verification from './Auth/CreateNewPasswordSteps/Verification';
 const Stack = createNativeStackNavigator();
 
 
-export default function App() {
+export default function App({navigation}) {
   const[token,setToken]=useState(null);
  
-
   const retrieveData=async()=>{
       try{
           const val=await AsyncStorage.getItem('token');
@@ -58,21 +57,18 @@ export default function App() {
   } 
 
 
-
-
   useEffect(()=>{
       retrieveData();
       //AsyncStorage.removeItem('token')
+
   },[])
-
-
 
   if(token){
       return(
           <>
               <NavigationContainer>
                 <Stack.Navigator initialRouteName='Home'>
-                  <Stack.Screen name='Home' component={Home} options={{ headerShown: false }}/>
+                 <Stack.Screen name='Home'  component={Home} options={{ headerShown: false }}/>
                 </Stack.Navigator>
               </NavigationContainer>
           </>

@@ -8,49 +8,49 @@ function Nav({role,state,navigation,data,token,additional_data}) {
     <View style={styles.container}>
         {role==='Admin'?
         <View style={styles.subcontainer}>
-            <Icon name='home' color={state==='home'&&'blue'} size={25} onPress={()=>{navigation.navigate('Admin Home',{
+            <Icon name='home' color={state==='home'&&'blue'} size={29} onPress={()=>{navigation.navigate('Admin Home',{
                 user:data,token:token
             })}}/>
-            <Icon name='users'color={state==='reqs'&&'blue'} size={25} onPress={()=>{navigation.navigate('Pendings',{
+            <Icon name='users'color={state==='reqs'&&'blue'} size={28} onPress={()=>{navigation.navigate('Pendings',{
                 user:data,token:token
             })}}/>
-            <Icon name='check'color={state==='approved'&&'blue'} size={25} onPress={()=>{navigation.navigate('Approved Users',{
+            <Icon name='check'color={state==='approved'&&'blue'} size={29} onPress={()=>{navigation.navigate('Approved Users',{
                 user:data,token:token
             })}}/>              
-            <Icon name='trash'color={state==='deletes'&&'blue'} size={25} onPress={()=>{navigation.navigate('Deleted Users',{
+            <Icon name='trash'color={state==='deletes'&&'blue'} size={29} onPress={()=>{navigation.navigate('Deleted Users',{
                 user:data,token:token
             })}}/>   
         </View>
 
         :role==='Manufacturer'?
         <View style={styles.subcontainer}>
-            <Icon name='home' color={state==='home'&&'blue'} size={25} onPress={()=>{navigation.navigate('Manufacturer Home',{
+            <Icon name='home' color={state==='home'&&'blue'} size={29} onPress={()=>{navigation.navigate('Manufacturer Home',{
                 user:data,token:token
             })}}/>  
-             <Icon name='plus-circle' color={state==='add_products'&&'blue'} size={25} onPress={()=>{navigation.navigate('AddProduct',{
+             <Icon name='plus-circle' color={state==='add_products'&&'blue'} size={29} onPress={()=>{navigation.navigate('AddProduct',{
                 user:data,token:token
             })}}/>
                
-            <Icon name='share-square-o' color={state==='distribute'&&'blue'} size={25} onPress={()=>{navigation.navigate('Distribution',{
+            <Icon name='share-square-o' color={state==='distribute'&&'blue'} size={29} onPress={()=>{navigation.navigate('Distribution',{
                 user:data,token:token
             })}}/>
-            <Icon name='hourglass' color={state==='history'&&'blue'} size={22} onPress={()=>{navigation.navigate('History',{
+            <Icon name='hourglass' color={state==='history'&&'blue'} size={29} onPress={()=>{navigation.navigate('History',{
                 user:data,token:token
             })}}/>
         </View>
         :role==='Distributor'?<>
         
         <View style={styles.subcontainer}>
-            <Icon name='home' color={state==='home'&&'blue'} size={25} onPress={()=>{navigation.navigate('Distributor Home',{
+            <Icon name='home' color={state==='home'&&'blue'} size={29} onPress={()=>{navigation.navigate('Distributor Home',{
                 user:data,token:token
             })}}/>  
-            <Icon name='hourglass' color={state==='history'&&'blue'} size={22} onPress={()=>{navigation.navigate('Stock',{
+            <Icon name='hourglass' color={state==='history'&&'blue'} size={25} onPress={()=>{navigation.navigate('Stock',{
                 user:data,token:token,additional_data:additional_data
             })}}/>
-            <Icon name='share-square-o' color={state==='distribute'&&'blue'} size={25} onPress={()=>{navigation.navigate('Distribution',{
+            <Icon name='share-square-o' color={state==='distribute'&&'blue'} size={29} onPress={()=>{navigation.navigate('Distribution',{
                 user:data,token:token
             })}}/>
-            <Icon name='user' color={state==='QR'&&'blue'} size={25} onPress={()=>{navigation.navigate('QR Code',{
+            <Icon name='user' color={state==='QR'&&'blue'} size={29} onPress={()=>{navigation.navigate('QR Code',{
                 user:data,token:token
             })}}/>
         </View>
@@ -58,16 +58,16 @@ function Nav({role,state,navigation,data,token,additional_data}) {
         role==='Retailer'?
         
         <View style={styles.subcontainer}>
-            <Icon name='home' color={state==='home'&&'blue'} size={25} onPress={()=>{navigation.navigate('Retailer Home',{
+            <Icon name='home' color={state==='home'&&'blue'} size={29} onPress={()=>{navigation.navigate('Retailer Home',{
                 user:data,token:token
             })}}/>  
-            <Icon name='hourglass' color={state==='history'&&'blue'} size={22} onPress={()=>{navigation.navigate('Retailer Stock',{
+            <Icon name='hourglass' color={state==='history'&&'blue'} size={25} onPress={()=>{navigation.navigate('Retailer Stock',{
                 user:data,token:token,additional_data:additional_data
             })}}/>
-            <Icon name='share-square-o' color={state==='distribute'&&'blue'} size={25} onPress={()=>{navigation.navigate('Retailer Distribution',{
+            <Icon name='share-square-o' color={state==='distribute'&&'blue'} size={29} onPress={()=>{navigation.navigate('Retailer Distribution',{
                 user:data,token:token
             })}}/>
-            <Icon name='user' color={state==='QR'&&'blue'} size={25} onPress={()=>{navigation.navigate('Retailer QR Code',{
+            <Icon name='user' color={state==='QR'&&'blue'} size={29} onPress={()=>{navigation.navigate('Retailer QR Code',{
                 user:data,token:token
             })}}/>
         </View>

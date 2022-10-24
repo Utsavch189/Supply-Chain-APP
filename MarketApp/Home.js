@@ -27,6 +27,18 @@ import DistributeR from './Retailer/DistributeR';
 import QRR from './Retailer/QRR';
 import RetailerReceiveHist from './Retailer/RetailerReceiveHist';
 import RetailerDisttributeHist from './Retailer/RetailerDisttributeHist';
+import Signup from './Auth/Signup';
+import Step1 from './Auth/SignupSteps/Step1';
+import Step2 from './Auth/SignupSteps/Step2';
+import Step3 from './Auth/SignupSteps/Step3';
+import Step4 from './Auth/SignupSteps/Step4';
+import Step5 from './Auth/SignupSteps/Step5';
+import OtpVerify from './Auth/SignupSteps/OtpVerify';
+import Final from './Auth/SignupSteps/Final';
+import First from './Auth/ForgetPasswordScreens/First';
+import Second from './Auth/ForgetPasswordScreens/Second';
+import Setup from './Auth/CreateNewPasswordSteps/Setup';
+import Verification from './Auth/CreateNewPasswordSteps/Verification';
 
 
 
@@ -35,6 +47,7 @@ const Stack = createNativeStackNavigator();
 function Home({navigation}) {
 
   const[user,setUser]=useState([]);
+
 
   const get = async() => {
     try {
@@ -65,8 +78,21 @@ useEffect(()=>{
         <Stack.Screen name='Approved Users' component={Approved}/>
         <Stack.Screen name='Deleted Users' component={Deleted}/>
         <Stack.Screen name='UserDetails' component={UserShowDetails} />
+
         <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
         <Stack.Screen name='Home' component={Home} options={{ headerShown: false }}/>
+        <Stack.Screen name="Register" component={Signup} options={{ headerShown: false }}/>        
+        <Stack.Screen name='Step 1' component={Step1} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 2' component={Step2} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 3' component={Step3} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 4' component={Step4} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 5' component={Step5} options={{ headerShown: false }}/>
+        <Stack.Screen name='Verify' component={OtpVerify} options={{ headerShown: false }}/>
+        <Stack.Screen name='Final' component={Final} options={{ headerShown: false }}/>
+        <Stack.Screen name='First Step' component={First} options={{ headerShown: false }}/>
+        <Stack.Screen name='Second Step' component={Second} options={{ headerShown: false }}/>
+        <Stack.Screen name='Setup' component={Setup} options={{ headerShown: false }}/>
+        <Stack.Screen name='Verification' component={Verification} options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
 
@@ -78,8 +104,21 @@ useEffect(()=>{
         <Stack.Screen name='AddProduct' component={AddProduct}/>
         <Stack.Screen name='Distribution' component={Distribute}/>
         <Stack.Screen name='History' component={HistoryDistribute}/>
+
         <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
         <Stack.Screen name='Home' component={Home} options={{ headerShown: false }}/>
+        <Stack.Screen name="Register" component={Signup} options={{ headerShown: false }}/>        
+        <Stack.Screen name='Step 1' component={Step1} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 2' component={Step2} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 3' component={Step3} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 4' component={Step4} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 5' component={Step5} options={{ headerShown: false }}/>
+        <Stack.Screen name='Verify' component={OtpVerify} options={{ headerShown: false }}/>
+        <Stack.Screen name='Final' component={Final} options={{ headerShown: false }}/>
+        <Stack.Screen name='First Step' component={First} options={{ headerShown: false }}/>
+        <Stack.Screen name='Second Step' component={Second} options={{ headerShown: false }}/>
+        <Stack.Screen name='Setup' component={Setup} options={{ headerShown: false }}/>
+        <Stack.Screen name='Verification' component={Verification} options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
     :
@@ -93,8 +132,21 @@ useEffect(()=>{
       <Stack.Screen name='HistoryNav' component={HistoryNav} options={{ headerShown: false }}/>
       <Stack.Screen name='Receive History' component={ReceiveStockHist}/>
       <Stack.Screen name='Distribute History' component={DistributeStockHist}/>
+      
       <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
       <Stack.Screen name='Home' component={Home} options={{ headerShown: false }}/>
+      <Stack.Screen name="Register" component={Signup} options={{ headerShown: false }}/>        
+        <Stack.Screen name='Step 1' component={Step1} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 2' component={Step2} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 3' component={Step3} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 4' component={Step4} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 5' component={Step5} options={{ headerShown: false }}/>
+        <Stack.Screen name='Verify' component={OtpVerify} options={{ headerShown: false }}/>
+        <Stack.Screen name='Final' component={Final} options={{ headerShown: false }}/>
+        <Stack.Screen name='First Step' component={First} options={{ headerShown: false }}/>
+        <Stack.Screen name='Second Step' component={Second} options={{ headerShown: false }}/>
+        <Stack.Screen name='Setup' component={Setup} options={{ headerShown: false }}/>
+        <Stack.Screen name='Verification' component={Verification} options={{ headerShown: false }}/>
     </Stack.Navigator>
   </NavigationContainer>
     :
@@ -108,8 +160,21 @@ useEffect(()=>{
       <Stack.Screen name='HistoryNav' component={HistoryNav} options={{ headerShown: false }}/>
       <Stack.Screen name='Retailer Receive History' component={RetailerReceiveHist}/>
       <Stack.Screen name='Retailer Distribute History' component={RetailerDisttributeHist}/>
+      
       <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
       <Stack.Screen name='Home' component={Home} options={{ headerShown: false }}/>
+      <Stack.Screen name="Register" component={Signup} options={{ headerShown: false }}/>        
+        <Stack.Screen name='Step 1' component={Step1} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 2' component={Step2} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 3' component={Step3} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 4' component={Step4} options={{ headerShown: false }}/>
+        <Stack.Screen name='Step 5' component={Step5} options={{ headerShown: false }}/>
+        <Stack.Screen name='Verify' component={OtpVerify} options={{ headerShown: false }}/>
+        <Stack.Screen name='Final' component={Final} options={{ headerShown: false }}/>
+        <Stack.Screen name='First Step' component={First} options={{ headerShown: false }}/>
+        <Stack.Screen name='Second Step' component={Second} options={{ headerShown: false }}/>
+        <Stack.Screen name='Setup' component={Setup} options={{ headerShown: false }}/>
+        <Stack.Screen name='Verification' component={Verification} options={{ headerShown: false }}/>
     </Stack.Navigator>
   </NavigationContainer>
     :<></>

@@ -5,15 +5,15 @@ import { url } from '../../baseUrl';
 import axios from 'axios';
 
 function OtpVerify({navigation}) {
-    const[emailfirst,setEmailFirst]=useState(0)
-    const[emailsecond,setEmailSecond]=useState(0)
-    const[emailthird,setEmailThird]=useState(0)
-    const[emailfourth,setEmailFourth]=useState(0)
+    const[emailfirst,setEmailFirst]=useState('')
+    const[emailsecond,setEmailSecond]=useState('')
+    const[emailthird,setEmailThird]=useState('')
+    const[emailfourth,setEmailFourth]=useState('')
 
-    const[phonefirst,setPhoneFirst]=useState(0)
-    const[phonesecond,setPhoneSecond]=useState(0)
-    const[phonethird,setPhoneThird]=useState(0)
-    const[phonefourth,setPhoneFourth]=useState(0)
+    const[phonefirst,setPhoneFirst]=useState('')
+    const[phonesecond,setPhoneSecond]=useState('')
+    const[phonethird,setPhoneThird]=useState('')
+    const[phonefourth,setPhoneFourth]=useState('')
 
     const[err,setErr]=useState('');
     const route=useRoute();
@@ -67,7 +67,7 @@ function OtpVerify({navigation}) {
             }
         })
     }
-
+console.log(emailfirst)
   return (
     <>
      <View style={styles.container}>
@@ -76,10 +76,10 @@ function OtpVerify({navigation}) {
         </View>
       
         <View style={styles.fields}>
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={emailfirst} onChangeText={(b)=>setEmailFirst(b)} />
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={emailsecond} onChangeText={(b)=>setEmailSecond(b)} />
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={emailthird} onChangeText={(b)=>setEmailThird(b)} />
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={emailfourth} onChangeText={(b)=>setEmailFourth(b)} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={emailfirst} onChangeText={(b)=>{emailfirst.length<1&&setEmailFirst(b)}} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={emailsecond} onChangeText={(b)=>{emailsecond.length<1&&setEmailSecond(b)}} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={emailthird} onChangeText={(b)=>{emailthird.length<1&&setEmailThird(b)}} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={emailfourth} onChangeText={(b)=>{emailfourth.length<1&&setEmailFourth(b)}} />
         </View>
 
         <View style={{width:'80%',marginTop:30}}>
@@ -87,10 +87,10 @@ function OtpVerify({navigation}) {
         </View>
       
         <View style={styles.fields1}>
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={phonefirst} onChangeText={(b)=>setPhoneFirst(b)} />
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={phonesecond} onChangeText={(b)=>setPhoneSecond(b)} />
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={phonethird} onChangeText={(b)=>setPhoneThird(b)} />
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={phonefourth} onChangeText={(b)=>setPhoneFourth(b)} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={phonefirst} onChangeText={(b)=>{phonefirst.length<1&&setPhoneFirst(b)}} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={phonesecond} onChangeText={(b)=>{phonesecond.length<1&&setPhoneSecond(b)}} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={phonethird} onChangeText={(b)=>{phonethird.length<1&&setPhoneThird(b)}} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={phonefourth} onChangeText={(b)=>{phonefourth.length<1&&setPhoneFourth(b)}} />
         </View>
 
         {err&&<Text style={{fontWeight:'bold',color:'red',marginTop:15}}>{err}</Text>}

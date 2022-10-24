@@ -5,6 +5,9 @@ import { StyleSheet, Text, View ,TextInput,TouchableOpacity,Image} from 'react-n
 
 
 function UserProfile({navigation,name,role,email,phone,creates,id}) {
+  
+  
+  
   return (
     <>
     <View style={styles.account}>

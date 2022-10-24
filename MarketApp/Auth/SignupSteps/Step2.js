@@ -64,9 +64,7 @@ useEffect(()=>{
     setPLock(false)
     setPhone_Err('')
   }
-  if(email){
-  email_validate(email)
-  }
+
 },[number,whatsapp,email])
 
 

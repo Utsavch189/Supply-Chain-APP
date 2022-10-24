@@ -8,12 +8,12 @@ import axios from 'axios';
 
 function Second({navigation}) {
 
-    const[first,setFirst]=useState(0)
-    const[second,setSecond]=useState(0)
-    const[third,setThird]=useState(0)
-    const[fourth,setFourth]=useState(0)
+    const[first,setFirst]=useState('')
+    const[second,setSecond]=useState('')
+    const[third,setThird]=useState('')
+    const[fourth,setFourth]=useState('')
 
-    const timerRef = useRef(null);
+    
     const[err,setErr]=useState('');
     const route=useRoute();
 
@@ -68,10 +68,10 @@ function Second({navigation}) {
         </View>
       
         <View style={styles.fields}>
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={first} onChangeText={(b)=>setFirst(b)} />
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={second} onChangeText={(b)=>setSecond(b)} />
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={third} onChangeText={(b)=>setThird(b)} />
-            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={fourth} onChangeText={(b)=>setFourth(b)} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={first} onChangeText={(b)=>{first.length<1&&setFirst(b)}} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={second} onChangeText={(b)=>{second.length<1&&setSecond(b)}} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={third} onChangeText={(b)=>{third.length<1&&setThird(b)}} />
+            <TextInput keyboardType="number-pad" style={{height:50,width:50,borderColor:'black',borderWidth:1,display:'flex',justifyContent:'center',alignItems:'center'}} value={fourth} onChangeText={(b)=>{fourth.length<1&&setFourth(b)}} />
 
         </View>
         {err&&<Text style={{fontWeight:'bold',color:'red',marginTop:15}}>{err}</Text>}
