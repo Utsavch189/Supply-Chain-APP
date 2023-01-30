@@ -29,7 +29,7 @@ function Login({navigation}) {
             "uid":userid,
             "password":password
         }
-        axios.post(`${url}/auth/jwt`,data)
+        axios.post(`${url}/auth/login`,data)
         .then(function (response) {
             if(response){
                 if(response.data['status']===200){
